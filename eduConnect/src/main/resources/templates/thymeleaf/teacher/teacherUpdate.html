@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html, body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Roboto", sans-serif
+}
+
+
+table {
+	width: 800px;
+	border-collapse: collapse;
+	margin-bottom: 40px;
+	margin-left: 38px;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+th {
+	width:200px;
+}
+
+th:first-child, td:first-child {
+  background-color: #f2f2f2;
+}
+
+</style>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/static/js/daumAddressScript.js"></script>
+
+</head>
+
+<body class="w3-light-grey">
+
+	<!-- Page Container -->
+	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
+
+		<!-- The Grid -->
+		<div class="w3-row-padding">
+
+			<!-- Left Column -->
+			<div class="w3-third">
+
+				<div class="w3-white w3-text-grey w3-card-4">
+					<div class="w3-container">
+						<h2>에듀 커넥트</h2>
+						<p>이름</p>
+						<p>내 정보</p>
+						<p>홈</p>
+						<p>로그아웃</p>
+						<br>
+					</div>
+				</div>
+				<br>
+
+				<!-- End Left Column -->
+			</div>
+
+			<!-- Right Column -->
+			<div class="w3-twothird">
+
+				<div class="w3-container w3-card w3-white w3-margin-bottom">
+					<h2 class="w3-text-grey w3-padding-16">선생님 수정</h2>
+					<form action="teacherModify" method="post"
+						th:object="${teacherCommand}">
+						<input type="hidden" name="teacherPw" value="qwerty123456!" />
+						<input type="hidden" name="teacherPwCon" value="qwerty123456!" />
+						<input type="hidden" name="teacherId" value="12345678">
+						<table>
+							<tr>
+								<th>직원번호</th>
+								<td><input type="text" name="teacherNum"  id="teacherNum"
+									readonly='readonly' th:value="${teacherCommand.teacherNum}" />
+							</tr>
+							<tr>
+								<th>이름</th>
+								<td><input type="text" name="teacherName"
+									th:value="${teacherCommand.teacherName}"> <span
+									style="color: red" th:if="${#fields.hasErrors('teacherName')}"
+									th:errors="*{teacherName}"
+									th:value="${teacherCommand.teacherName}"></span></td>
+							</tr>
+							<tr>
+								<th>주소</th>
+								<td><input type="text" name="teacherAddr"
+									id="sample4_roadAddress"
+									th:value="${teacherCommand.teacherAddr}">
+									<button type="button" onclick="execDaumPostcode();">주소검색</button>
+									</td>
+							</tr>
+							<tr>
+								<th>상세주소</th>
+								<td><input type="text" name="teacherAddrDetail"
+									th:value="${teacherCommand.teacherAddrDetail}"></td>
+							</tr>
+							<tr>
+								<th>우편번호</th>
+								<td><input type="text" name="teacherPost"
+									id="sample4_postcode" th:value="${teacherCommand.teacherPost}" />
+									<span style="color: red"
+									th:if="${#fields.hasErrors('teacherAddr')}"
+									th:errors="*{teacherAddr}"></span></td>
+							</tr>
+							<tr>
+								<th>연락처</th>
+								<td><input type="text" name="teacherPhone"
+									th:value="${teacherCommand.teacherPhone}" /> <span
+									style="color: red" th:if="${#fields.hasErrors('teacherPhone')}"
+									th:errors="*{teacherPhone}"></span></td>
+							</tr>
+							<tr>
+								<th>이메일</th>
+								<td><input type="email" name="teacherEmail"
+									id="teacherEmail" th:value="${teacherCommand.teacherEmail}" />
+									<span style="color: red"
+									th:if="${#fields.hasErrors('teacherEmail')}"
+									th:errors="*{teacherEmail}"></span> <span id='emailCheck'></span></td>
+							</tr>
+							<tr>
+								<th>주민번호</th>
+								<td><input type="text" name="teacherJumin"
+									th:value="${teacherCommand.teacherJumin}" /> <span
+									style="color: red" th:if="${#fields.hasErrors('teacherJumin')}"
+									th:errors="*{teacherJumin}"></span></td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit" value="수정" /></td>
+							</tr>
+						</table>
+
+					</form>
+				</div>
+
+			</div>
+
+			<!-- End Right Column -->
+		</div>
+
+		<!-- End Grid -->
+	</div>
+
+	<!-- End Page Container -->
+
+	<footer class="w3-container w3-teal w3-center w3-margin-top">
+		<p>Find me on social media.</p>
+		<i class="fa fa-facebook-official w3-hover-opacity"></i> <i
+			class="fa fa-instagram w3-hover-opacity"></i> <i
+			class="fa fa-snapchat w3-hover-opacity"></i> <i
+			class="fa fa-pinterest-p w3-hover-opacity"></i> <i
+			class="fa fa-twitter w3-hover-opacity"></i> <i
+			class="fa fa-linkedin w3-hover-opacity"></i>
+		<p>
+			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
+				target="_blank">w3.css</a>
+		</p>
+	</footer>
+
+</body>
+
+</html>
