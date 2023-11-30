@@ -21,7 +21,7 @@ import eduConnect.service.teacher.TeacherUpdateservice;
 
 @Controller
 @RequestMapping("teacherRg")
-public class TeacherController {
+public class TeacherRgController {
 
 	@Autowired
 	TeacherAutoNumService teacherAutoNumService;
