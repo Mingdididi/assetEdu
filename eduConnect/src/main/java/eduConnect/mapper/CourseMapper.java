@@ -12,6 +12,7 @@ public interface CourseMapper {
 	public List<CourseDTO> selectAll(String teacherNum);
 	public CourseDTO selectOne(String num);
 	public void courseUpdate(CourseDTO dto);
+	public void courseDel(String num);
 
 
 }

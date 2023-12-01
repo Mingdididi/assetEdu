@@ -27,15 +27,17 @@
 	where course_num = #{num}
 	</select>
 	
-	<update id="courseUpdate"  parameterType="course" >
+	<update id="courseUpdate"  parameterType="course"  >
 	
 	update course
 	set course_Name = #{courseName},
 	    course_content = #{courseContent}
-	    where num = #{courseNum}
-	    
-	    
+	    where course_num = #{courseNum}
 	</update>
+	<delete id="courseDel" parameterType="string">
+	delete from course 
+	where course_num = #{courseNum}
 	
+	</delete>
 	
 	</mapper>
