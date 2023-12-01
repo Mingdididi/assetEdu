@@ -18,12 +18,11 @@ import eduConnect.service.teacher.TeacherDetailService;
 import eduConnect.service.teacher.TeacherInsertService;
 import eduConnect.service.teacher.TeacherListService;
 import eduConnect.service.teacher.TeacherUpdateservice;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("teacherRg")
-public class TeacherRgController {
- 
+@RequestMapping("manager")
+public class ManagerController {
+
 	@Autowired
 	TeacherAutoNumService teacherAutoNumService;
 	@Autowired
@@ -37,15 +36,15 @@ public class TeacherRgController {
 	@Autowired
 	TeacherDeleteService teacherDeleteService;
 	
-	@GetMapping("teacherList")
+	@GetMapping("managerList")
 	public String teacherList(
 			@RequestParam(value="page", required = false, defaultValue = "1" ) int page,
 			@RequestParam(value="searchWord" , required = false) String searchWord,
 			Model model) {
 		
-		teacherListService.execute(searchWord, page, model);
+		//managerListService.execute(searchWord, page, model);
 		
-		return "thymeleaf/teacher/teacherList";
+		return "thymeleaf/manager/managerList";
 	}
 	
 	@RequestMapping(value = "teacherRegist", method = RequestMethod.GET)
@@ -95,7 +94,4 @@ public class TeacherRgController {
 		teacherDeleteService.execute(teacherNum);
 		return "redirect:teacherList";
 	}
-	
-	
-	
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="eduConnect.mapper.UserMapper">
+
+<resultMap type="authInfo" id="authInfoResultMap">
+	<constructor>
+		<arg column="student_num" javaType="string" />
+		<arg column="student_id" javaType="string" />
+		<arg column="student_pw" javaType="string" />
+		<arg column="student_name" javaType="string" />
+		<arg column="grade" javaType="string" />
+		<arg column="student_email" javaType="string" />
+		<arg column="student_email_conf" javaType="string" />
+	</constructor>
+</resultMap>
+
+<select id="loginSelect" parameterType="string" resultMap="authInfoResultMap">
+select student_num, student_id ,student_pw ,student_name ,'stu' grade ,student_email ,student_email_conf 
+from student
+where student_id = #{userId}
+union 
+select teacher_num, teacher_id, teacher_pw, teacher_name, 'tc', teacher_email  , 'T'
+from teacher
+where teacher_id = #{userId}
+union
+select manager_num, manager_id, manager_pw, manager_name, 'ma', manager_email, 'T'
+from manager
+where manager_id = #{userId}
+</select>
+</mapper>

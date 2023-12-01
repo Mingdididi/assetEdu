@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html, body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Roboto", sans-serif
+}
+
+
+table {
+	width: 800px;
+	border-collapse: collapse;
+	margin-bottom: 40px;
+	margin-left: 38px;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	padding: 8px;
+}
+
+th:first-child, td:first-child {
+  background-color: #f2f2f2;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+</style>
+</head>
+
+<body class="w3-light-grey">
+
+	<!-- Page Container -->
+	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
+
+		<!-- The Grid -->
+		<div class="w3-row-padding">
+
+			<!-- Left Column -->
+			<div class="w3-third">
+
+				<div class="w3-white w3-text-grey w3-card-4">
+					<div class="w3-container">
+						<h2>에듀 커넥트</h2>
+						<p>이름</p>
+						<p>내 정보</p>
+						<p>홈</p>
+						<p>로그아웃</p>
+						<br>
+					</div>
+				</div>
+				<br>
+
+				<!-- End Left Column -->
+			</div>
+
+			<!-- Right Column -->
+			<div class="w3-twothird">
+
+				<div class="w3-container w3-card w3-white w3-margin-bottom">
+					<h2 class="w3-text-grey w3-padding-16">[[${teacherCommand.teacherName}]] 선생님 </h2>
+				
+				<!-- 선생님 디테일 -->
+					<table>
+						<tr>
+							<td>번호 </td><td> [[${teacherCommand.teacherNum}]]</td>
+						</tr>
+						<tr>
+							<td>아이디 </td><td> [[${teacherCommand.teacherId}]]</td>
+						</tr>
+						<tr>
+							<td>주소 </td><td> [[${teacherCommand.teacherAddr}]]</td>
+						</tr>
+						<tr>
+							<td>상세주소 </td><td> [[${teacherCommand.teacherAddrDetail}]]</td>
+						</tr>
+						<tr>
+							<td>우편번호 </td><td> [[${teacherCommand.teacherPost}]]</td>
+						</tr>
+						<tr>
+							<td>연락처 </td><td> [[${teacherCommand.teacherPhone}]]</td>
+						</tr>
+						<tr>
+							<td>이메일 </td><td> [[${teacherCommand.teacherEmail}]]</td>
+						</tr>
+						<tr>
+							<td>주민번호 </td><td> [[${teacherCommand.teacherJumin}]]</td>
+						</tr>
+						<tr>
+							<td>등록일 </td><td>
+								[[${#dates.format(teacherCommand.teacherRegister,'yyyy-MM-dd')}]]</td>
+						</tr>
+						<tr>
+							<td colspan="2"><a th:href="|teacherModify?teacherNum=${teacherCommand.teacherNum}|">
+						    	정보 수정</a></td>
+						</tr>
+					</table>
+					<!-- 선생님 디테일 종료 -->
+				</div>
+
+			</div>
+
+			<!-- End Right Column -->
+		</div>
+
+		<!-- End Grid -->
+	</div>
+
+	<!-- End Page Container -->
+
+	<footer class="w3-container w3-teal w3-center w3-margin-top">
+		<p>Find me on social media.</p>
+		<i class="fa fa-facebook-official w3-hover-opacity"></i> <i
+			class="fa fa-instagram w3-hover-opacity"></i> <i
+			class="fa fa-snapchat w3-hover-opacity"></i> <i
+			class="fa fa-pinterest-p w3-hover-opacity"></i> <i
+			class="fa fa-twitter w3-hover-opacity"></i> <i
+			class="fa fa-linkedin w3-hover-opacity"></i>
+		<p>
+			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
+				target="_blank">w3.css</a>
+		</p>
+	</footer>
+
+</body>
+
+</html>

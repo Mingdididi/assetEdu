@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import eduConnect.domain.AuthInfoDTO;
 import eduConnect.domain.StartEndPageDTO;
 import eduConnect.domain.TeacherDTO;
 import eduConnect.mapper.TeacherMapper;
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class TeacherListService {
@@ -24,7 +26,10 @@ public class TeacherListService {
 		vo.setStartRow(stratRow); 
 		vo.setEndRow(endRow);
 		vo.setSearchWord(searchWord);
+		
 		List<TeacherDTO> list = teacherMapper.teacherAllSelect(vo);
+		
+		
 		model.addAttribute("list", list);
 		model.addAttribute("searchWord", searchWord);
 		

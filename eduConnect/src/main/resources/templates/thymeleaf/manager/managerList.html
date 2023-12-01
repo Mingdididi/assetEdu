@@ -22,18 +22,21 @@ footer {
 }
 
 table {
+	width: 800px;
 	border-collapse: collapse;
+	margin-bottom: 40px;
+	margin-left: 38px;
 }
-
 td, th {
 	border: 1px solid #dddddd;
 	padding: 8px;
 }
 
-tr:first-child {
-	background-color: #f2f2f2; /* 연한 회색 배경색 */
-	margin-bottom: 10px; /* 첫 번째 행 아래 간격 조절 */
-}
+   tr:first-child {
+        background-color: #f2f2f2; /* 연한 회색 배경색 */
+        margin-bottom: 10px; /* 첫 번째 행 아래 간격 조절 */
+    }
+
 </style>
 </head>
 
@@ -51,54 +54,11 @@ tr:first-child {
 				<div class="w3-white w3-text-grey w3-card-4">
 					<div class="w3-container">
 						<h2>에듀 커넥트</h2>
-
-
-						<div th:if="${session.auth == null}">
-							<form action="/login/login" method="post"
-								th:object="${loginCommand}">
-								<table border="1" align="center">
-									<tr align="center">
-										<td colspan="2">자동로그인<input type="checkbox"
-											name="autoLogin" /> 아이디저장<input type="checkbox"
-											name="idStore">
-										</td>
-									</tr>
-									<tr>
-										<td><input type="text" name="userId" placeholder="아이디"><br />
-											<span th:if="${#fields.hasErrors('userId')}"
-											th:errors="*{userId}"></span></td>
-										<td rowspan="2"><input type="image"
-											src="/static/images/sbmt.png" width="60"></td>
-									</tr>
-									<tr>
-										<td><input type="password" name="userPw"
-											placeholder="비밀번호" /><br /> <span
-											th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}">
-										</span></td>
-									</tr>
-									<tr>
-										<td colspan="2"><a href="/register/userAgree">회원가입</a> |
-											<a href="/help/findId">아이디 찾기</a> | <a
-											href="/help/findPassword">비밀번호 찾기</a></td>
-									</tr>
-								</table>
-							</form>
-						</div>
-						<div th:if="${session.auth != null}">
-							<th:block th:if="${session.auth.grade == 'stu'}">
-학생
-</th:block>
-							<th:block th:if="${session.auth.grade == 'tc'}">
-선생
-<a href="teacher/MyPage">마이페이지</a>
-							</th:block>
-							<th:block th:if="${session.auth.grade == 'ma'}">
-관리자<br>
-								<a href="teacherRg/teacherList">선생님 목록</a>
-								<br>
-							</th:block>
-							<li><a href="login/logout">로그아웃</a></li>
-						</div>
+						<p>이름</p>
+						<p>내 정보</p>
+						<p>홈</p>
+						<p>로그아웃</p>
+						<br>
 					</div>
 				</div>
 				<br>
@@ -111,11 +71,48 @@ tr:first-child {
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
 					<h2 class="w3-text-grey w3-padding-16">선생님 목록</h2>
-
+					
 					<!-- 선생님 목록 리스트 -->
-					오른쪽 상자
+					<form action="managerList" method="post">
+						<input type="search" name="searchWord" size=50 
+							th:value="${searchWord}" /> <input type="submit" value="검색" />
+					</form><br/>
+						<table border=1 width=600px>
+							<tr>
+								<th>직원번호</th>
+								<th>직원아이디</th>
+								<th>직원이름</th>
+								<th>등록일</th>
+								<th>연락처</th>
+								
+							</tr>
+							<!-- 리스트에 있는 값 반복 -->
+							<tr th:each="managerVO : ${list}">
+								<td><a>[[${managerVO.managerNum}]]</a></td>
+								<td><a
+									th:href="@{managerDetail(managerNum=${managerVO.managerNum})}">[[${managerVO.managerId}]]</a></td>
+								<td>[[${managerVO.managerName}]]</td>
+								<td>[[${#dates.format(managerVO.managerRegister,'yyyy-MM-dd')}]]</td>
+								<td>[[${managerVO.managerPhone}]]</td>
+							</tr>
+							<!-- 페이지 누를 때마다 그에 맞는 리스트 불러오는 요청 -->
+							<tr>
+								<th colspan="6">
+								<th:block th:if="${page <= 1}"> [이전] </th:block> 
+								<th:block th:if="${page > 1}">
+									[<a th:href="@{managerList(page=${page - 1},searchWord=${searchWord})}">이전</a>]
+								</th:block> 
+								
+								<th:block th:each=" i  :  ${#numbers.sequence(startPage, endPage)}">
+								[ <a th:href="@{managerList(page=${i},searchWord=${searchWord})}">[[${i}]]</a> ]
+								
+								</th:block> <th:block th:if="${page < maxPage}">
+								<a th:href="@{managerList(page=${page + 1},searchWord=${searchWord})}">[다음]</a>
+							    </th:block> <th:block th:if="${page >= maxPage}"> [다음] </th:block></th>
+							</tr>
+						</table>
 					<!-- 선생님 목록리스트 종료 -->
-					<a href="teacherRegist">선생님 등록</a>
+					<a href="managerRegist">선생님 등록</a>
 				</div>
 
 			</div>
