@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+강의번호 : [[${dto.courseNum}]]<br/>
+강사번호 : [[${dto.teacherNum}]]<br/>
+강의제목 : [[${dto.courseName}]]<br/>
+강의내용 : [[${dto.courseContent}]]<br/>
+<a th:href="|courseUpdate?ccourseNum=${dto.courseNum}|">수정</a>|  
+<a th:href="@{courseDel(courseNum=${dto.courseNum})}">삭제</a>  | 
+
+ <a href="courseList">강의목록</a>
+
+
+
+
+</body>
+</html>
