@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script 
+src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script>
+$(function(){
+	$("#frm").submit(function(){
+		if($("#studentPw").val() == ""){
+			alert("비밀번호를 입력해주세요.");
+			$("#studentPw").focus();
+			return false;
+		}else{
+			conf = confirm("정말 탈퇴하시겠습니까?");
+			if(!conf){
+				return false;
+			}
+		}
+	});
+});
+</script>
+</head>
+<body>
+<form action="studentDeleteAccept" method="post"  name="frm" id="frm">
+	
+	비밀번호 : <input type="password" id="studentPw" name="studentPw" />
+	<input type="submit" value="회원탈퇴" />
+	<div style="color:red">[[${errPw }]]</div>
+</form>
+</body>
+</html>
