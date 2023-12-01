@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import eduConnect.domain.AuthInfoDTO;
 import eduConnect.domain.TeacherDTO;
 import eduConnect.mapper.TeacherMapper;
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class TeacherDetailService {

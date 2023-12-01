@@ -8,12 +8,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import eduConnect.command.TeacherCommand;
+import eduConnect.domain.AuthInfoDTO;
 import eduConnect.service.teacher.TeacherDetailService;
 import eduConnect.service.teacher.TeacherUpdateservice;
-///////////////////// 정숙언니랑 겹치는 Controller, commit pull할 때 조심!!
+import jakarta.servlet.http.HttpSession;
+///////////////////// 선생님 입장에서 본인 정보 수정하는 Controller
 @Controller
 @RequestMapping("teacher")
 public class TeacherController {
@@ -22,6 +23,7 @@ public class TeacherController {
 	@Autowired
 	TeacherUpdateservice teacherUpdateservice;
 
+
 	@RequestMapping(value= "MyPage", method=RequestMethod.GET)
 	   public String Mypage() {
 	      return "thymeleaf/teacher/Mypage";
@@ -29,17 +31,18 @@ public class TeacherController {
 
 	
 	@RequestMapping("teacherDetail")
-	public String teacherDetail( Model model) {
-		////로그인 후 session 값으로 변경
-		String teacherNum ="tc100001";
-		
+	public String teacherDetail(HttpSession session,Model model) {
+		AuthInfoDTO auth = (AuthInfoDTO)session.getAttribute("auth");
+		String teacherNum = auth.getUserNum();
 		teacherDetailService.execute(teacherNum, model);
 		return "thymeleaf/teacher/teacherMyDetail";
 	}
 	
 	
 	@RequestMapping(value = "teacherModify", method = RequestMethod.GET)
-	public String employeeUpdate(@RequestParam(value = "teacherNum") String teacherNum, Model model) {
+	public String employeeUpdate(Model model,HttpSession session) {
+		AuthInfoDTO auth = (AuthInfoDTO)session.getAttribute("auth");
+		String teacherNum = auth.getUserNum();
 		teacherDetailService.execute(teacherNum, model);
 		return "thymeleaf/teacher/teacherUpdate";
 	}

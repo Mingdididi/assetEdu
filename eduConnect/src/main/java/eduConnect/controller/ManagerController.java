@@ -18,7 +18,8 @@ import eduConnect.service.teacher.TeacherDetailService;
 import eduConnect.service.teacher.TeacherInsertService;
 import eduConnect.service.teacher.TeacherListService;
 import eduConnect.service.teacher.TeacherUpdateservice;
-
+import jakarta.servlet.http.HttpSession;
+///관리자 삭제추가 하려다가 못한 Controller, 우선순위 x 
 @Controller
 @RequestMapping("manager")
 public class ManagerController {
@@ -68,13 +69,13 @@ public class ManagerController {
 	
 
 	@RequestMapping("teacherDetail")
-	public String teacherDetail(@RequestParam(value = "teacherNum") String teacherNum, Model model) {
+	public String teacherDetail(@RequestParam(value = "teacherNum") String teacherNum, Model model, HttpSession session) {
 		teacherDetailService.execute(teacherNum, model);
 		return "thymeleaf/teacher/teacherDetail";
 	}
 	
 	@RequestMapping(value = "teacherModify", method = RequestMethod.GET)
-	public String employeeUpdate(@RequestParam(value = "teacherNum") String teacherNum, Model model) {
+	public String employeeUpdate(@RequestParam(value = "teacherNum") String teacherNum, Model model,HttpSession session) {
 		teacherDetailService.execute(teacherNum, model);
 		return "thymeleaf/teacher/teacherUpdate";
 	}
