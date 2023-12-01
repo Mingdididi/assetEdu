@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>나의 정보</title>
+</head>
+<body>
+나의 정보<br />   
+<table border="1" width="600">
+   <tr><td> 이름 </td><td>[[${dto.studentName }]]</td></tr>
+   <tr><td> 아이디 </td><td>[[${dto.studentId}]]</td></tr>
+   <tr><td> 성별 </td><td><span th:if="${dto.studentGender=='M' }" th:text="남자"></span>
+   						<span th:if="${dto.studentGender=='F' }" th:text="여자"></span></td></tr>
+   <tr><td> 생년월일 </td><td>[[${#dates.format(dto.studentBirth, 'yyyy-MM-dd') }]]</td></tr>
+   <tr><td> 이메일 </td><td>[[${dto.studentEmail}]]</td></tr>
+   <tr><td> 주소 </td><td>[[${dto.studentAddr}]]</td></tr>
+   <tr><td> 상세주소</td><td>[[${dto.studentAddrDetail}]]</td></tr>
+   <tr><td> 우편번호</td><td>[[${dto.studentPost}]]</td></tr>
+   <tr><td> 전화번호</td><td>[[${dto.studentPhone}]]</td></tr>
+   </table>
+<a th:href="studentModify">회원 수정</a> | <!-- 쿼리스트링?대신 /를 써서 studentNum을 주소처럼 사용-->
+<a th:href="studentDelete">회원 탈퇴</a> <!-- requesparam쓰는거... -->
+</body>
+</html>

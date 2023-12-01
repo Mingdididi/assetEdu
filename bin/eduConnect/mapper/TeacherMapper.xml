@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="eduConnect.mapper.TeacherMapper">
+<sql id="teacherBaseColumns">
+teacher_num, teacher_id, teacher_pw, teacher_jumin, teacher_addr, teacher_addr_detail, teacher_phone
+, teacher_email, teacher_name, teacher_register, teacher_post
+</sql>
+<sql id="teacherAliesColumns">
+teacher_num teacherNum, teacher_id teacherId, teacher_pw teacherPw, teacher_jumin teacherJumin, teacher_addr teacherAddr, teacher_addr_detail teacherAddrDetail, teacher_phone teacherPhone
+, teacher_email teacherEmail, teacher_name teacherName, teacher_register teacherRegister, teacher_post teacherPost
+</sql>
+
+
+<select id="autoNum"  resultType="string">
+select concat('tc' , coalesce(max(substr(teacher_num,3)::Integer),100000) + 1) from teacher
+</select>
+
+<insert id="teacherInsert" parameterType="teacher" >
+	insert into teacher( <include refid="teacherBaseColumns" /> )
+	values( #{teacherNum},#{teacherId} ,#{teacherPw},#{teacherJumin},#{teacherAddr},#{teacherAddrDetail}
+	 ,#{teacherPhone}  ,#{teacherEmail}  ,#{teacherName} ,now() ,#{teacherPost})
+</insert>
+
+<select id="teacherAllSelect" resultType="teacher" parameterType="startEndPageDTO" >
+select *
+from   (select ROW_NUMBER() OVER (ORDER BY teacher_num) AS rn, <include refid="teacherAliesColumns" />
+		from (select <include refid="teacherBaseColumns" />
+			from teacher
+			<if test="searchWord != null">
+			where teacher_num  like '%' || #{searchWord} || '%'  
+			   or teacher_id   like '%' || #{searchWord} || '%'  
+			   or teacher_name like '%' || #{searchWord} || '%'
+			</if>
+		) sub1 ) sub2
+where rn between #{startRow}  and #{endRow}
+</select>
+
+<select id="teacherCount" parameterType="string" resultType="integer">
+	select count(*) from teacher
+	<if test="searchWord != null">
+	where teacher_num  like '%' || #{searchWord} || '%'  
+	   or teacher_id   like '%' || #{searchWord} || '%'  
+	   or teacher_num like '%' || #{searchWord} || '%'
+	</if>
+</select>
+
+<select id="teacherOneSelect"  parameterType="string" resultType="teacher">
+ select <include refid="teacherAliesColumns" />
+from teacher where teacher_num = #{teacherNum}
+</select>
+
+<update id="teacherUpdate" parameterType="teacher">
+	update teacher
+set   teacher_name = #{teacherName}
+    , teacher_addr =#{teacherAddr}
+    <if test="teacherAddrDetail != null">
+    , teacher_ADDR_detail = #{teacherAddrDetail}
+    </if>
+    , teacher_POST =#{teacherPost}
+    , teacher_PHONE = #{teacherPhone}
+    , teacher_jumin = #{teacherJumin}
+where teacher_num = #{teacherNum}
+</update>
+
+<delete id="teacherDelete" parameterType="string">
+delete from teacher where teacher_num = #{teacherNum}
+</delete>
+
+</mapper>

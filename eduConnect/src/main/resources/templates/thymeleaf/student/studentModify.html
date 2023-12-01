@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/static/js/daumAddressScript.js"></script>
+<script>
+$(function(){$("#studentEmail").on("change keyup",function(){
+	$.ajax({
+		type:'post',
+		url:"/checkRest/userEmailCheck",
+		data:{"userEmail":$("#studentEmail").val()},
+		dataType:'text',
+		success:function(result){
+			$("#emailCheck").text(result);
+			if(result.trim()=="사용가능한 이메일입니다."){
+				$("#emailCheck").css("color","blue");
+			}else($("#emailCheck").css("color","red"));
+		},
+		error:function(){
+		}
+	});
+});
+});
+</script>
+</head>
+<body>
+<form action="studentUpdate" method="post">
+<input type="hidden" name="studentPw" value="commandPw1!">
+<input type="hidden" name="studentPwCon" value="commandPwCon">
+<table width=600 border=1 align="center" th:object="${studentCommand}">
+<input type="hidden" name="studentNum" th:value="${studentCommand.studentNum }"/>
+<tr><td>이름</td><td><input type="text" name="studentName" th:value="${studentCommand.studentName }"/></td></tr>
+<tr><td>아이디</td><td><input type="text" name="studentId" th:value="${studentCommand.studentId}" readonly="readonly" /><br />
+<span style="color:red" th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}"></span>			
+			</td></tr>
+<tr><td>주소</td><td><input type="text" name="studentAddr" 
+					th:value="${studentCommand.studentAddr}"
+					id="sample4_roadAddress" onclick="execDaumPostcode();" />
+<br /><span style="color:red" th:if="${#fields.hasErrors('studentAddr')}" th:errors="*{studentAddr}"></span>					
+</td></tr>
+<tr><td>상세주소</td><td><input type="text" name="studentAddr2" th:value="${studentCommand.studentAddr2 }"/>
+<tr><td>우편번호</td><td><input type="text" name="studentPost" id="sample4_postcode" th:value="${studentCommand.studentPost }"/></td></tr>
+<tr><td>연락처</td><td><input type="text" name="studentPhone" th:value="${studentCommand.studentPhone }"/></td></tr>
+<tr><td>성별</td><td><input type="radio" name="studentGender" value="M" 
+					th:checked="${studentCommand.studentGender == 'M'}" />남자
+					<input type="radio" name="studentGender"  value="F" 
+					th:checked="${studentCommand.studentGender == 'F'}"/>여자</td></tr>
+<tr><td>생년월일</td><td><input type="date" name="studentBirth" th:value="${#dates.format(studentCommand.studentBirth, 'yyyy-MM-dd') }"/></td></tr>
+<tr><td>이메일</td><td><input type="text" name="studentEmail" th:value="${studentCommand.studentEmail }"/><br/>
+<span id="emailCheck"></span>
+<span style="color:red" th:if="${#fields.hasErrors('studentEmail')}" th:errors="*{studentEmail}"></span></td></tr>
+<tr><td colspan="2"><input type="submit" value="회원정보 수정"/></td></tr>
+</table>
+</form>
+</body>
+</html>

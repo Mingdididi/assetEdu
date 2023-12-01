@@ -87,6 +87,7 @@ tr:first-child {
 						<div th:if="${session.auth != null}">
 							<th:block th:if="${session.auth.grade == 'stu'}">
 학생
+<a href="/student/myPage">마이페이지</a>
 </th:block>
 							<th:block th:if="${session.auth.grade == 'tc'}">
 선생
