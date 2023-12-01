@@ -10,4 +10,9 @@
 		select teacher_id from teacher
 		where teacher_id = #{userId}
 	</select>
-</mapper>
+	<select id="selectEmailCheck" parameterType="string" resultType="string">
+		select student_email from student where student_email=#{userEmail} 
+		union 
+		select teacher_email from teacher where teacher_email=#{userEmail}
+	</select>
+	</mapper>
