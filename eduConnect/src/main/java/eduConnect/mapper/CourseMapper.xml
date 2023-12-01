@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="eduConnect.mapper.CourseMapper">
+	
+	
+	<insert id="courseInsert" parameterType="course">
+   insert into course(course_Num, course_name , teacher_Num , course_content )
+   values((select concat('cou', coalesce(max(substring(course_num,4)::integer),100000) + 1)
+      from course),#{courseName},#{teacherNum},#{courseContent})
+   
+   </insert>
+	
+	<select id="selectAll" resultType="course" parameterType="string">
+	select course_num courseNum , course_Name courseName , teacher_num teacherNum
+	       , course_content courseContent
+	 from course 
+	 where teacher_num = #{taecherNum}
+	 order by course_num desc
+	</select>
+	
+	<select id="selectOne" resultType="course" parameterType="string">
+	select course_num courseNum , course_Name courseName , teacher_num teacherNum
+	       , course_content courseContent
+	 from course 
+	where course_num = #{num}
+	</select>
+	
+	<update id="courseUpdate"  parameterType="course" >
+	
+	update course
+	set course_Name = #{courseName},
+	    course_content = #{courseContent}
+	    where num = #{courseNum}
+	    
+	    
+	</update>
+	
+	
+	</mapper>

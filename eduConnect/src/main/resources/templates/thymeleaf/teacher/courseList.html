@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+강의등록<br />
+
+<table border= 1 width="600px" align="center">
+
+	<tr><th>강의번호</th><th>강사번호</th><th>제목</th></tr>
+	<tr th:each="dto : ${dtos}">
+		<td><a th:href="|courseDetail?courseNum=${dto.courseNum}|">
+			[[${dto.courseNum}]]</a></td>
+		<td> [[${dto.teacherNum}]]
+		</td>
+		<td>[[${dto.courseName}]]</td>
+	</tr>
+</table><br /> 
+
+<a href="courseWrite">등록하기</a>
+
+
+</body>
+</html>
