@@ -10,7 +10,7 @@
 강사번호 : [[${dto.teacherNum}]]<br/>
 강의제목 : [[${dto.courseName}]]<br/>
 강의내용 : [[${dto.courseContent}]]<br/>
-강의실 : [[${dto.classRoom}]]<br/>
+강의실 : <a th:href="${dto.classRoom}">[[${dto.classRoom}]]</a><br/>
 <a th:href="|courseUpdate?courseNum=${dto.courseNum}|">수정</a>|  
 <a th:href="@{courseDel(courseNum=${dto.courseNum})}">삭제</a>  | 
 
