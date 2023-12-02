@@ -6,36 +6,38 @@
 	
 	
 	<insert id="courseInsert" parameterType="course">
-   insert into course(course_Num, course_name , teacher_Num , course_content )
+   insert into course(course_Num, course_name , teacher_Num , course_content , course_url )
    values((select concat('cou', coalesce(max(substring(course_num,4)::integer),100000) + 1)
-      from course),#{courseName},#{teacherNum},#{courseContent})
+      from course),#{courseName},#{teacherNum},#{courseContent},#{classRoom})
    
    </insert>
 	
 	<select id="selectAll" resultType="course" parameterType="string">
 	select course_num courseNum , course_Name courseName , teacher_num teacherNum
-	       , course_content courseContent
+	       , course_content courseContent, course_url classRoom
 	 from course 
-	 where teacher_num = #{taecherNum}
+	 where teacher_num = #{teacherNum}
 	 order by course_num desc
 	</select>
 	
 	<select id="selectOne" resultType="course" parameterType="string">
 	select course_num courseNum , course_Name courseName , teacher_num teacherNum
-	       , course_content courseContent
+	       , course_content courseContent , course_url classRoom
 	 from course 
 	where course_num = #{num}
 	</select>
 	
-	<update id="courseUpdate"  parameterType="course" >
+	<update id="courseUpdate"  parameterType="course"  >
 	
 	update course
 	set course_Name = #{courseName},
 	    course_content = #{courseContent}
-	    where num = #{courseNum}
-	    
-	    
+	    where course_num = #{courseNum}
 	</update>
+	<delete id="courseDel" parameterType="string">
+	delete from course 
+	where course_num = #{courseNum}
 	
+	</delete>
 	
 	</mapper>

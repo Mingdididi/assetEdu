@@ -18,6 +18,7 @@ public class CourseModifyService {
 		dto.setCourseName(courseCommand.getCourseName());
 		dto.setCourseNum(courseCommand.getCourseNum());
 		dto.setTeacherNum(courseCommand.getTeacherNum());
+		dto.setClassRoom(courseCommand.getClassRoom());
 		courseMapper.courseUpdate(dto);
 		
 	}

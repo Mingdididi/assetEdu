@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input, textarea, button {
+            box-sizing: border-box;
+        }
+
+        input {
+            width: 70px; /* 번호와 답의 너비를 조절 */
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #2E8B57; /* 짙은 녹색 */
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+            border: 1px solid #2E8B57; /* 짙은 녹색 */
+        }
+    </style>
+</head>
+<body>
+<form></form>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>문제</th>
+                <th>답</th>
+                <th>동작</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" name="번호" value="1" readonly></td>
+                <td><textarea name="문제"></textarea></td>
+                <td><input type="number" name="답" value="1" min="1"></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button onclick="addRow()">행 추가</button>
+
+    <script>
+        function addRow() {
+            var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.rows.length);
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+
+            // 각 셀에 input 요소 추가
+            var lastRow = table.rows[table.rows.length - 2]; // 마지막으로 추가된 행
+            var lastNumber = parseInt(lastRow.cells[0].querySelector('input[name="번호"]').value);
+            var newNumber = isNaN(lastNumber) ? 1 : lastNumber + 1;
+
+            cell1.innerHTML = '<input type="text" name="번호" value="' + newNumber + '" readonly>';
+            cell2.innerHTML = '<textarea name="문제"></textarea>';
+            cell3.innerHTML = '<input type="number" name="답" value="1">';
+            
+            // 새로 추가된 행에는 삭제 버튼 추가
+            cell4.innerHTML = '<button onclick="deleteRow(this)">삭제</button>';
+        }
+
+        function deleteRow(button) {
+            // 삭제 버튼이 속한 행 찾기
+            var row = button.parentNode.parentNode;
+
+            // 행 삭제
+            row.parentNode.removeChild(row);
+
+            // 번호 재설정
+            resetNumbers();
+        }
+
+        function resetNumbers() {
+            var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+
+            for (var i = 0; i < table.rows.length; i++) {
+                var row = table.rows[i];
+                var numberCell = row.cells[0].querySelector('input[name="번호"]');
+                numberCell.value = i + 1;
+            }
+        }
+    </script>
+</body>
+</html>

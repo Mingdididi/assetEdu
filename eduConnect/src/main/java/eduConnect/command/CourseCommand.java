@@ -9,5 +9,5 @@ public class CourseCommand {
 	String courseName;
 	String courseContent;
 	String teacherNum;
-
+	String classRoom;
 }

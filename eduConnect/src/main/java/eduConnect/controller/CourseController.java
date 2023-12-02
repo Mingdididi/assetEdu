@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import eduConnect.command.CourseCommand;
+import eduConnect.service.course.CourseDelService;
 import eduConnect.service.course.CourseDetailService;
 import eduConnect.service.course.CourseListService;
 import eduConnect.service.course.CourseModifyService;
@@ -27,6 +28,8 @@ public class CourseController {
 	CourseDetailService courseDetailService;
 	@Autowired
 	CourseModifyService courseModifyService;
+	@Autowired
+	CourseDelService courseDelService;
 
 	@RequestMapping(value = "MyPage", method = RequestMethod.GET)
 	public String Mypage() {
@@ -54,9 +57,20 @@ public class CourseController {
 		courseDetailService.execute(model, courseNum);
 		return "thymeleaf/teacher/courseInfo";
 	}
+	@RequestMapping(value="courseUpdate", method = RequestMethod.GET)
+	public String courseUpdate(Model model, @RequestParam(value = "courseNum") String courseNum) {
+		courseDetailService.execute(model, courseNum);
+		return "thymeleaf/teacher/courseModifyForm";
+	}
+
 	@PostMapping(value="courseModify" )
 	public String courseModify(CourseCommand courseCommand) {
 		courseModifyService.execute(courseCommand);
-		return "redirect:courseDetail?num="+courseCommand.getCourseNum();
+		return "redirect:courseDetail?courseNum="+courseCommand.getCourseNum();
     }
+	@RequestMapping(value="courseDel" ,method = RequestMethod.GET)
+	public String courseDel(@RequestParam(value = "courseNum") String courseNum) {
+		courseDelService.execute(courseNum);
+		return "redirect:courseList";
+	}
 }

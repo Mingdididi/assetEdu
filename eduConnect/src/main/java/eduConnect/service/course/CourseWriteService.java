@@ -19,11 +19,13 @@ public class CourseWriteService {
 		String courseName = courseCommand.getCourseName();
 		String courseContent = courseCommand.getCourseContent();
 		String teacherNum = auth.getUserNum();
+		String classRoom = courseCommand.getClassRoom();
 		
 		CourseDTO dto= new CourseDTO();
 		dto.setCourseName(courseName);
 		dto.setCourseContent(courseContent);
 		dto.setTeacherNum(teacherNum);
+		dto.setClassRoom(classRoom);
 		courseMapper.courseInsert(dto);
 		
 		

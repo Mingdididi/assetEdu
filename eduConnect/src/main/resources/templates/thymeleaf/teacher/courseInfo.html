@@ -9,7 +9,12 @@
 강의번호 : [[${dto.courseNum}]]<br/>
 강사번호 : [[${dto.teacherNum}]]<br/>
 강의제목 : [[${dto.courseName}]]<br/>
+<<<<<<< HEAD
 강의내용 : [[${dto.courseContent}]]<br/>
+=======
+강의내용 : [[${dto.courseContent}]]<br/>
+강의실 : <a th:href="${dto.classRoom}">[[${dto.classRoom}]]</a><br/>
+>>>>>>> branch 'master' of https://github.com/YeeunGo/eduConnect.git
 <a th:href="|courseUpdate?courseNum=${dto.courseNum}|">수정</a>|  
 <a th:href="@{courseDel(courseNum=${dto.courseNum})}">삭제</a>  | 
 
@@ -18,7 +23,10 @@
 <ul>
 
 <li> 커리큘럼 </li>
+<<<<<<< HEAD
 <li> <a>실시간 강의 등록</a> </li>
+=======
+>>>>>>> branch 'master' of https://github.com/YeeunGo/eduConnect.git
 <li> 질의 응답 </li>
 <li> <a th:href="|../test/testList?courseNum=${dto.courseNum}|">시험</a> </li>
 <li> 출석 </li>

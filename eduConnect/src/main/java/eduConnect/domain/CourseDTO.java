@@ -11,5 +11,6 @@ public class CourseDTO {
 	String courseName;
 	String courseContent;
 	String teacherNum;
+	String classRoom;
 
 }
