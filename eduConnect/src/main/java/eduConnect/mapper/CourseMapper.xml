@@ -6,9 +6,9 @@
 	
 	
 	<insert id="courseInsert" parameterType="course">
-   insert into course(course_Num, course_name , teacher_Num , course_content )
+   insert into course(course_Num, course_name , teacher_Num , course_content , course_url )
    values((select concat('cou', coalesce(max(substring(course_num,4)::integer),100000) + 1)
-      from course),#{courseName},#{teacherNum},#{courseContent})
+      from course),#{courseName},#{teacherNum},#{courseContent},#{courseUrl})
    
    </insert>
 	
