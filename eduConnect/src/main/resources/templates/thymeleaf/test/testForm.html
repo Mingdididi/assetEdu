@@ -1,85 +1,170 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-        }
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+	font-family: 'Arial', sans-serif;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
 
-        th {
-            background-color: #f2f2f2;
-        }
+th {
+	background-color: #f2f2f2;
+}
 
-        input, textarea, button {
-            box-sizing: border-box;
-        }
+input, textarea, button {
+	box-sizing: border-box;
+}
 
-        input {
-            width: 70px; /* 번호와 답의 너비를 조절 */
-        }
+input {
+	width: 70px; /* 번호와 답의 너비를 조절 */
+}
 
-        textarea {
-            width: 100%;
-        }
+textarea {
+	width: 100%;
+}
 
-        button {
-            cursor: pointer;
-            background-color: #2E8B57; /* 짙은 녹색 */
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            border-radius: 4px;
-        }
+button {
+	cursor: pointer;
+	background-color: #2E8B57; /* 짙은 녹색 */
+	color: white;
+	border: none;
+	padding: 8px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	border-radius: 4px;
+}
 
-        button:hover {
-            background-color: white;
-            color: black;
-            border: 1px solid #2E8B57; /* 짙은 녹색 */
-        }
-    </style>
+button:hover {
+	background-color: white;
+	color: black;
+	border: 1px solid #2E8B57; /* 짙은 녹색 */
+}
+
+
+
+    /* Content Container */
+    .w3-container {
+      padding: 16px;
+      min-height: 80vh; /* 푸터 전의 화면 길이를 늘림 */
+      box-sizing: border-box; /* min-height를 border-box로 설정 */
+    }
+
+    /* Margin Bottom Style */
+    .w3-margin-bottom {
+      margin-bottom: 20px;
+    }
+
+    /* Footer Style */
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+
+
+</style>
 </head>
-<body>
-<form></form>
-    <table id="myTable">
-        <thead>
-            <tr>
-                <th>번호</th>
-                <th>문제</th>
-                <th>답</th>
-                <th>동작</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input type="text" name="번호" value="1" readonly></td>
-                <td><textarea name="문제"></textarea></td>
-                <td><input type="number" name="답" value="1" min="1"></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
 
-    <button onclick="addRow()">행 추가</button>
+<body class="w3-light-grey">
 
-    <script>
+	<!-- Page Container -->
+	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
+
+		<!-- The Grid -->
+		<div class="w3-row-padding">
+
+			<!-- Left Column -->
+			<div class="w3-third">
+
+				<div class="w3-white w3-text-grey w3-card-4">
+					<div class="w3-container">
+						<h2>에듀 커넥트</h2>
+					</div>
+				</div>
+				<br>
+
+				<!-- End Left Column -->
+			</div>
+
+			<!-- Right Column -->
+			<div class="w3-twothird">
+
+				<div class="w3-container w3-card w3-white w3-margin-bottom">
+					<h2 class="w3-text-grey w3-padding-16">시험 등록</h2>
+
+					<form></form>
+					<table id="myTable">
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>문제</th>
+								<th>답</th>
+								<th>삭제</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input type="text" name="번호" value="1" readonly></td>
+								<td><textarea name="문제"></textarea></td>
+								<td><input type="number" name="답" value="1" min="1"></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<button onclick="addRow()">행 추가</button>
+				</div>
+
+			</div>
+
+			<!-- End Right Column -->
+		</div>
+
+		<!-- End Grid -->
+	</div>
+
+	<!-- End Page Container -->
+
+	<footer class="w3-container w3-teal w3-center w3-margin-top">
+		<p>Find me on social media.</p>
+		<i class="fa fa-facebook-official w3-hover-opacity"></i> <i
+			class="fa fa-instagram w3-hover-opacity"></i> <i
+			class="fa fa-snapchat w3-hover-opacity"></i> <i
+			class="fa fa-pinterest-p w3-hover-opacity"></i> <i
+			class="fa fa-twitter w3-hover-opacity"></i> <i
+			class="fa fa-linkedin w3-hover-opacity"></i>
+		<p>
+			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
+				target="_blank">w3.css</a>
+		</p>
+	</footer>
+   <script>
         function addRow() {
             var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
             var newRow = table.insertRow(table.rows.length);
@@ -124,4 +209,5 @@
         }
     </script>
 </body>
+
 </html>
