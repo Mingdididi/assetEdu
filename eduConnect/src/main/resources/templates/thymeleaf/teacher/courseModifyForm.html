@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="courseModify" method="post">
+	<input type="hidden" name="courseNum" th:value="${dto.courseNum }"/>
+	<table>
+	<caption>강의수정</caption>
+	
+		<tr><td>강사번호</td>
+		<td><input type="text" name="teacherNum" th:value="${dto.teacherNum }"></td>
+		</tr>
+		<tr><td>강의제목</td>
+		<td><input type="text" name="courseName" th:value="${dto.courseName }"></td>
+		</tr>
+		<tr><td>강의내용</td>
+		<td><textarea rows="6" cols="40" name="courseContent">[[${dto.courseContent }]]</textarea></td>
+		</tr>
+		<tr><th colspan=2>
+		<input type="submit" value="수정 완료" /> 
+		<input type="button" value="뒤로가기"  onclick="javascript:history.back()" />
+		</th></tr>
+	</table>
+</form>
+
+
+
+
+
+</body>
+</html>
