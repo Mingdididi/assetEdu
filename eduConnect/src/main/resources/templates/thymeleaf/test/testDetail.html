@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+	font-family: 'Arial', sans-serif;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+input, textarea, button {
+	box-sizing: border-box;
+}
+
+input {
+	width: 70px; /* 번호와 답의 너비를 조절 */
+}
+
+textarea {
+	width: 100%;
+}
+
+button {
+	cursor: pointer;
+	background-color: #2E8B57; /* 짙은 녹색 */
+	color: white;
+	border: none;
+	padding: 8px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	border-radius: 4px;
+}
+
+button:hover {
+	background-color: white;
+	color: black;
+	border: 1px solid #2E8B57; /* 짙은 녹색 */
+}
+
+
+
+    /* Content Container */
+    .w3-container {
+      padding: 16px;
+      min-height: 80vh; /* 푸터 전의 화면 길이를 늘림 */
+      box-sizing: border-box; /* min-height를 border-box로 설정 */
+    }
+
+    /* Margin Bottom Style */
+    .w3-margin-bottom {
+      margin-bottom: 20px;
+    }
+
+    /* Footer Style */
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+
+
+</style>
+</head>
+
+<body class="w3-light-grey">
+
+	<!-- Page Container -->
+	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
+
+		<!-- The Grid -->
+		<div class="w3-row-padding">
+
+			<!-- Left Column -->
+			<div class="w3-third">
+
+				<div class="w3-white w3-text-grey w3-card-4">
+					<div class="w3-container">
+						<h2>에듀 커넥트</h2>
+					</div>
+				</div>
+				<br>
+
+				<!-- End Left Column -->
+			</div>
+
+			<!-- Right Column -->
+			<div class="w3-twothird">
+
+				<div class="w3-container w3-card w3-white w3-margin-bottom">
+					<h2 class="w3-text-grey w3-padding-16">시험 등록</h2>
+						<button onclick="addRow()">행 추가</button>
+					<form action="testUpdate" method="post">
+					회차 번호 : <input type="number" name="sessionNum" th:value="${dtos.get(0).sessionNum}" min="1" value="1">
+					등록일 : [[${#dates.format(dtos.get(0).testDate,'yyyy-MM-dd') }]]
+					<input type="hidden" th:value="${dtos.get(0).testNum}" name="testNum">
+								<input type="hidden" th:value="${dtos.get(0).courseNum}" name="courseNum">
+					<table id="myTable">
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>문제</th>
+								<th>답</th>
+								<th>삭제</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="dto:${dtos}">
+								
+								<td><input type="number" name="testQuestionNum" th:value="${dto.testQuestionNum}" readonly></td>
+								<td><textarea name="testQuestionContent"  required="required">[[${dto.testQuestionContent}]]</textarea></td>
+								<td><input type="number" name="testQuestionAnswer" th:value="${dto.testQuestionAnswer}" min="1"></td>
+								<td><button onclick="deleteRow(this)">삭제</button></td>
+							</tr>
+						</tbody>
+							
+					</table>
+					
+					<input type="submit" value="시험 수정">
+				</form> 
+			
+
+				</div>
+					
+			</div>
+
+			<!-- End Right Column -->
+		</div>
+
+		<!-- End Grid -->
+	</div>
+
+	<!-- End Page Container -->
+
+	<footer class="w3-container w3-teal w3-center w3-margin-top">
+		<p>Find me on social media.</p>
+		<i class="fa fa-facebook-official w3-hover-opacity"></i> <i
+			class="fa fa-instagram w3-hover-opacity"></i> <i
+			class="fa fa-snapchat w3-hover-opacity"></i> <i
+			class="fa fa-pinterest-p w3-hover-opacity"></i> <i
+			class="fa fa-twitter w3-hover-opacity"></i> <i
+			class="fa fa-linkedin w3-hover-opacity"></i>
+		<p>
+			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
+				target="_blank">w3.css</a>
+		</p>
+	</footer>
+   <script>
+        function addRow() {
+            var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.rows.length);
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+
+            // 각 셀에 input 요소 추가
+            var lastRow = table.rows[table.rows.length - 2]; // 마지막으로 추가된 행
+            var lastNumber = parseInt(lastRow.cells[0].querySelector('input[name="testQuestionNum"]').value);
+            var newNumber = isNaN(lastNumber) ? 1 : lastNumber + 1;
+
+            cell1.innerHTML = '<input type="text" name="testQuestionNum" value="' + newNumber + '" readonly>';
+            cell2.innerHTML = '<textarea name="testQuestionContent" required="required"></textarea>';
+            cell3.innerHTML = '<input type="number" name="testQuestionAnswer" value="1">';
+            
+            // 새로 추가된 행에는 삭제 버튼 추가
+            cell4.innerHTML = '<button onclick="deleteRow(this)">삭제</button>';
+        }
+
+        function deleteRow(button) {
+            // 삭제 버튼이 속한 행 찾기
+            var row = button.parentNode.parentNode;
+
+            // 행 삭제
+            row.parentNode.removeChild(row);
+
+            // 번호 재설정
+            resetNumbers();
+        }
+
+        function resetNumbers() {
+            var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+
+            for (var i = 0; i < table.rows.length; i++) {
+                var row = table.rows[i];
+                var numberCell = row.cells[0].querySelector('input[name="testQuestionNum"]');
+                numberCell.value = i + 1;
+            }
+        }
+    </script>
+</body>
+
+</html>
