@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<div th:block th:if="${session.auth.grade=='tc'}">
 <table>
  <tr th:each="sessionNum : ${sessionNums}">
         <td><a th:href="@{testDetail(sessionNum=${sessionNum}, courseNum=${courseNum})}">[[${sessionNum}]]회차 시험</a></td>
@@ -14,5 +14,15 @@
 
 
 <a th:href="|testRegist?courseNum=${courseNum}|">시험 등록</a>
+</div>
+
+<div th:block th:if="${session.auth.grade=='stu'}">
+<table>
+ <tr th:each="sessionNum : ${sessionNums}">
+        <td><a th:href="@{testStu(sessionNum=${sessionNum}, courseNum=${courseNum})}">[[${sessionNum}]]회차 시험</a></td>
+    </tr>
+</table>
+</div>
+
 </body>
 </html>
