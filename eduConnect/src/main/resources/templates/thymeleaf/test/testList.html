@@ -5,7 +5,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-시험 목록
+
+<table>
+ <tr th:each="sessionNum : ${sessionNums}">
+        <td><a th:href="@{testDetail(sessionNum=${sessionNum}, courseNum=${courseNum})}">[[${sessionNum}]]회차 시험</a></td>
+    </tr>
+</table>
+
 
 <a th:href="|testRegist?courseNum=${courseNum}|">시험 등록</a>
 </body>

@@ -23,6 +23,7 @@ footer {
 
 table {
 	border-collapse: collapse;
+	
 }
 
 td, th {
@@ -33,6 +34,21 @@ td, th {
 tr:first-child {
 	background-color: #f2f2f2; /* 연한 회색 배경색 */
 	margin-bottom: 10px; /* 첫 번째 행 아래 간격 조절 */
+}
+
+.w3-third {
+	margin: 20px auto; /* 상하단 패딩을 조절하여 높이를 크게 조절 */
+	margin-bottom: 40px auto;
+	float: none;
+	width: 70%; /* 필요에 따라 너비 조절 */
+}
+
+/* "에듀커넥트" 텍스트를 가운데 정렬하고 색상과 굵기 조절 */
+.w3-third h2 {
+	text-align: center;
+	color: #006400; /* 진녹색 */
+	font-weight: bold; /* 굵게 */
+	margin-top: 20px; /* 텍스트와 상단 간격 조절 */
 }
 </style>
 </head>
@@ -88,6 +104,7 @@ tr:first-child {
 							<th:block th:if="${session.auth.grade == 'stu'}">
 학생
 <a href="/student/myPage">마이페이지</a>
+<a href="/student/course">과목</a>
 </th:block>
 							<th:block th:if="${session.auth.grade == 'tc'}">
 선생
@@ -107,42 +124,13 @@ tr:first-child {
 				<!-- End Left Column -->
 			</div>
 
-			<!-- Right Column -->
-			<div class="w3-twothird">
-
-				<div class="w3-container w3-card w3-white w3-margin-bottom">
-					<!--  나중에 삭제 -->
-					<h2 class="w3-text-grey w3-padding-16">선생님 목록</h2>
-
-					<!-- 선생님 목록 리스트 -->
-					오른쪽 상자
-					<!-- 선생님 목록리스트 종료 -->
-					<a href="teacherRg/teacherRegist">선생님 등록</a>
-				</div>
-
-			</div>
-
-			<!-- End Right Column -->
-		</div>
 
 		<!-- End Grid -->
 	</div>
 
 	<!-- End Page Container -->
 
-	<footer class="w3-container w3-teal w3-center w3-margin-top">
-		<p>Find me on social media.</p>
-		<i class="fa fa-facebook-official w3-hover-opacity"></i> <i
-			class="fa fa-instagram w3-hover-opacity"></i> <i
-			class="fa fa-snapchat w3-hover-opacity"></i> <i
-			class="fa fa-pinterest-p w3-hover-opacity"></i> <i
-			class="fa fa-twitter w3-hover-opacity"></i> <i
-			class="fa fa-linkedin w3-hover-opacity"></i>
-		<p>
-			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
-				target="_blank">w3.css</a>
-		</p>
-	</footer>
+	
 
 </body>
 

@@ -1,21 +1,24 @@
 package eduConnect.service.test;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import eduConnect.domain.TestDTO;
 import eduConnect.mapper.TestMapper;
 
 @Service
-public class TestListService {
+public class TestDetailService {
 	@Autowired
 	TestMapper testMapper;
 	
-	public void execute(String courseNum, Model model) {
+	public void execute(String courseNum, String sessionNum, Model model) {
 		
-		String sessionNums [] = testMapper.testList(courseNum);
+		List<TestDTO> dtos = testMapper.testSelectOne(courseNum, sessionNum);
 		
-		model.addAttribute("courseNum",courseNum);
-		model.addAttribute("sessionNums", sessionNums);
+		
+		model.addAttribute("dtos", dtos);
 	}
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+
+<mapper namespace="eduConnect.mapper.TestMapper">
+
+<select id="testAutoNum" resultType="string">
+select concat('te' , coalesce(max(substr(test_num,3)::Integer),100000) + 1) from test
+</select>
+
+<insert id="testWrite" parameterType="test">
+insert into test (test_num, test_date, course_num, session_num)
+values(#{testNum}, now(), #{courseNum}, #{sessionNum})
+</insert>
+
+<insert id="testQuestionWrite" parameterType="test">
+    INSERT INTO test_questions ( Test_Num, Test_Question_Num, Test_Question_Content, Test_Question_Answer)
+    VALUES (#{testNum}, #{testQuestionNum}, #{testQuestionContent}, #{testQuestionAnswer})
+    </insert>
+    
+ <select id="testList" parameterType="string" resultType="string">
+ select session_num from test where course_num = #{course_num};
+ </select>
+ 
+ <select id="testSelectOne" parameterType="string" resultType="test">
+ select session_num sessionNum , t.test_num testNum, test_Question_Num testQuestionNum, test_Question_Content testQuestionContent, test_Question_Answer testQuestionAnswer 
+ 		, test_Date testDate, course_Num courseNum
+ from test t right outer join test_questions tq
+ on(t.test_num = tq.test_num)
+ where session_num = #{sessionNum} and course_num = #{courseNum}
+ </select>
+ 
+ <delete id="testDelete" parameterType="string">
+ 	delete from test where test_num = #{testNum}
+ </delete>
+</mapper>

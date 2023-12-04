@@ -119,10 +119,10 @@ button:hover {
 					<h2 class="w3-text-grey w3-padding-16">시험 등록</h2>
 						<button onclick="addRow()">행 추가</button>
 					<form action="testUpdate" method="post">
-					<input type="hidden" name="testNum" th:value="${testNum}">
-					<input type="hidden" name="courseNum" th:value="${courseNum}">
-					회차 번호 : <input type="number" name="sessionNum" min="1" value="1">
-
+					회차 번호 : <input type="number" name="sessionNum" th:value="${dtos.get(0).sessionNum}" min="1" value="1">
+					등록일 : [[${#dates.format(dtos.get(0).testDate,'yyyy-MM-dd') }]]
+					<input type="hidden" th:value="${dtos.get(0).testNum}" name="testNum">
+								<input type="hidden" th:value="${dtos.get(0).courseNum}" name="courseNum">
 					<table id="myTable">
 						<thead>
 							<tr>
@@ -133,17 +133,18 @@ button:hover {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><input type="number" name="testQuestionNum" value="1" readonly></td>
-								<td><textarea name="testQuestionContent" required="required"></textarea></td>
-								<td><input type="number" name="testQuestionAnswer" value="1" min="1"></td>
-								<td></td>
+							<tr th:each="dto:${dtos}">
+								
+								<td><input type="number" name="testQuestionNum" th:value="${dto.testQuestionNum}" readonly></td>
+								<td><textarea name="testQuestionContent"  required="required">[[${dto.testQuestionContent}]]</textarea></td>
+								<td><input type="number" name="testQuestionAnswer" th:value="${dto.testQuestionAnswer}" min="1"></td>
+								<td><button onclick="deleteRow(this)">삭제</button></td>
 							</tr>
 						</tbody>
 							
 					</table>
 					
-					<input type="submit" value="시험 등록">
+					<input type="submit" value="시험 수정">
 				</form> 
 			
 

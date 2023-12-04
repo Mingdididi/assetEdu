@@ -7,15 +7,11 @@ import org.springframework.ui.Model;
 import eduConnect.mapper.TestMapper;
 
 @Service
-public class TestListService {
+public class TestAutoNumService {
 	@Autowired
 	TestMapper testMapper;
-	
-	public void execute(String courseNum, Model model) {
-		
-		String sessionNums [] = testMapper.testList(courseNum);
-		
-		model.addAttribute("courseNum",courseNum);
-		model.addAttribute("sessionNums", sessionNums);
+	public void execute(Model model) {
+		String testNum = testMapper.testAutoNum();
+		model.addAttribute("testNum", testNum);
 	}
 }
