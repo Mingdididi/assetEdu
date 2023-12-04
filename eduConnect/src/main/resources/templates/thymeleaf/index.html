@@ -101,24 +101,19 @@ tr:first-child {
 							</form>
 						</div>
 						<div th:if="${session.auth != null}">
-<<<<<<< HEAD
 							<div th:block th:if="${session.auth.grade == 'stu'}">
 								학생
 								<a href="/student/myPage">마이페이지</a>
+								<a href="/student/course">과목</a>
 								</div>
-=======
-							<th:block th:if="${session.auth.grade == 'stu'}">
-학생
-<a href="/student/myPage">마이페이지</a>
-<a href="/student/course">과목</a>
+
 </th:block>
->>>>>>> branch 'master' of https://github.com/YeeunGo/eduConnect.git
 							<th:block th:if="${session.auth.grade == 'tc'}">
 								선생
 								<a href="teacher/MyPage">마이페이지</a>
 															</th:block>
 							<th:block th:if="${session.auth.grade == 'ma'}">
-관리자<br>
+								관리자<br>
 								<a href="teacherRg/teacherList">선생님 목록</a>
 								<br>
 							</th:block>
