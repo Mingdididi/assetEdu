@@ -19,9 +19,9 @@
 		<td>[[${dto.courseName}]]</td>
 	</tr>
 </table><br /> 
-
+<div th:block th:if="${session.auth.grade=='tc'}">
 <a href="courseWrite">등록하기</a>
-
+</div>
 
 </body>
 </html>

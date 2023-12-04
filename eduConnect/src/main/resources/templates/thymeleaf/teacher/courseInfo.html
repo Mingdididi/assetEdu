@@ -10,16 +10,20 @@
 강사번호 : [[${dto.teacherNum}]]<br/>
 강의제목 : [[${dto.courseName}]]<br/>
 강의내용 : [[${dto.courseContent}]]<br/>
+<div th:block th:if="${session.auth.grade=='tc'}">
 강의실 : <a th:href="${dto.classRoom}">[[${dto.classRoom}]]</a><br/>
 <a th:href="|courseUpdate?courseNum=${dto.courseNum}|">수정</a>|  
 <a th:href="@{courseDel(courseNum=${dto.courseNum})}">삭제</a>  | 
-
- <a href="courseList">강의목록</a>
+<a href="courseList">강의목록</a>
+</div>
+<div th:block th:if="${session.auth.grade=='stu'}"><!-- 수강중이면 '수강중'으로 바꾸기 -->
+<a th:href="|../student/courseRegist?courseNum=${dto.courseNum}|">수강신청</a>
+</div>
 
 <ul>
 
 <li> 커리큘럼 </li>
-<li> 질의 응답 </li>
+<li> <a href="../question/questionList">질의응답</a> </li>
 <li> 시험 </li>
 <li> 학생 목록 </li>
 

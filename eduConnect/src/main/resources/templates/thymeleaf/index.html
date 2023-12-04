@@ -85,14 +85,14 @@ tr:first-child {
 							</form>
 						</div>
 						<div th:if="${session.auth != null}">
-							<th:block th:if="${session.auth.grade == 'stu'}">
-학생
-<a href="/student/myPage">마이페이지</a>
-</th:block>
+							<div th:block th:if="${session.auth.grade == 'stu'}">
+								학생
+								<a href="/student/myPage">마이페이지</a>
+								</div>
 							<th:block th:if="${session.auth.grade == 'tc'}">
-선생
-<a href="teacher/MyPage">마이페이지</a>
-							</th:block>
+								선생
+								<a href="teacher/MyPage">마이페이지</a>
+															</th:block>
 							<th:block th:if="${session.auth.grade == 'ma'}">
 관리자<br>
 								<a href="teacherRg/teacherList">선생님 목록</a>
@@ -109,7 +109,7 @@ tr:first-child {
 
 			<!-- Right Column -->
 			<div class="w3-twothird">
-
+	
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
 					<!--  나중에 삭제 -->
 					<h2 class="w3-text-grey w3-padding-16">선생님 목록</h2>
@@ -119,6 +119,14 @@ tr:first-child {
 					<!-- 선생님 목록리스트 종료 -->
 					<a href="teacherRg/teacherRegist">선생님 등록</a>
 				</div>
+				<!--  학생 로그인 시 -->
+				<div class="w3-container w3-card w3-white w3-margin-bottom">
+				<div th:if = "${session.auth!=null}">
+					<div th:if = "${session.auth.grade=='stu'}">
+						<h2 class="w3-text-grey w3-padding-16"><a href="student/course"/>수강 과목</h2>
+					</div>
+				</div>
+				
 
 			</div>
 

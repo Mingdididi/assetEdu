@@ -17,10 +17,15 @@ public class CourseListService {
 	CourseMapper courseMapper;
 	public void execute(Model model, HttpSession session) {
 		AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
-		String teacherNum = auth.getUserNum();
-		List<CourseDTO>list = courseMapper.selectAll(teacherNum);
-		model.addAttribute("dtos", list);
-		
+		if(auth.getGrade().equals("tc")) {
+			String teacherNum = auth.getUserNum();
+			List<CourseDTO> list = courseMapper.selectAll(teacherNum);
+			model.addAttribute("dtos", list);
+		}
+		else {
+			List<CourseDTO> list = courseMapper.allTheCourse();
+			model.addAttribute("dtos", list);
+		}
 		
 	}
 

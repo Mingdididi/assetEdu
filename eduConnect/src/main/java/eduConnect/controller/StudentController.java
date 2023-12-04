@@ -6,12 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import eduConnect.command.StudentCommand;
+import eduConnect.domain.AuthInfoDTO;
+import eduConnect.service.student.StuCourseListService;
+import eduConnect.service.student.StuCourseRegistService;
 import eduConnect.service.student.StudentDeleteService;
 import eduConnect.service.student.StudentDetailService;
 import eduConnect.service.student.StudentMyInfoService;
@@ -29,6 +31,10 @@ public class StudentController {
 	StudentUpdateService studentUpdateService;
 	@Autowired
 	StudentDeleteService studentDeleteService;
+	@Autowired
+	StuCourseListService stuCourseListService;
+	@Autowired
+	StuCourseRegistService stuCourseRegistService;
 		
 	@GetMapping("myPage")
 	public String studentmyInfo(HttpSession session, Model model) {
@@ -62,5 +68,18 @@ public class StudentController {
 			return "thymeleaf/student/studentDelete";
 		}
 	}
-	
+	@GetMapping("course")
+	public String stCourseList(HttpSession session, String studentNum, Model model) {
+		AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
+		studentNum = auth.getUserNum();
+		stuCourseListService.execute(studentNum, model);
+		return "thymeleaf/student/stCourseList";
+	}
+	@GetMapping("courseRegist")
+	public String courseRegist(@RequestParam(value="courseNum")String courseNum, String studentNum, HttpSession session) {
+		AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
+		studentNum = auth.getUserNum();
+		stuCourseRegistService.execute(studentNum, courseNum);
+		return "redirect:course";
+	}
 }

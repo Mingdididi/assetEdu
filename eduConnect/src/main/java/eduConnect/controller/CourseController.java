@@ -53,7 +53,7 @@ public class CourseController {
 		return "redirect:courseList";
 	}
 	@GetMapping(value="courseDetail")
-	public String courseDetail(Model model, @RequestParam(value = "courseNum")String courseNum) {
+	public String courseDetail(HttpSession session, Model model, @RequestParam(value = "courseNum")String courseNum) {
 		courseDetailService.execute(model, courseNum);
 		return "thymeleaf/teacher/courseInfo";
 	}

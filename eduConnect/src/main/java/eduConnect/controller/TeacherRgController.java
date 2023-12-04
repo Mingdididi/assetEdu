@@ -37,7 +37,7 @@ public class TeacherRgController {
 	@Autowired
 	TeacherDeleteService teacherDeleteService;
 	
-	@GetMapping("teacherList")
+	@RequestMapping("teacherList")
 	public String teacherList(
 			@RequestParam(value="page", required = false, defaultValue = "1" ) int page,
 			@RequestParam(value="searchWord" , required = false) String searchWord,

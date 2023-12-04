@@ -22,4 +22,28 @@ delete from student
 where student_num = #{studentNum}
 </delete>
 
+<resultMap type="stuCourseList" id="stuCourseResultMap">
+	<result column="student_num" jdbcType="VARCHAR" property="studentNum"/>
+	<result column="teacher_name" jdbcType="VARCHAR" property="teacherName"/>
+	<association property="courseDTO" javaType="course">
+			<result column="course_num" jdbcType="VARCHAR" property="courseNum" />
+			<result column="course_name" jdbcType="VARCHAR" property="courseName" />
+			<result column="course_content" jdbcType="VARCHAR" property="courseContent" />
+			<result column="teacher_num" jdbcType="VARCHAR" property="teacherNum" />
+			<result column="course_url" jdbcType="VARCHAR" property="classRoom" />
+		</association>
+</resultMap>
+
+<select id="stuCourseList" parameterType="string" resultMap="stuCourseResultMap">
+select c.course_num, c.course_name , c.course_content , c.teacher_num , 
+c.course_url , sc.student_num, t.teacher_name 
+from student_course sc join course c 
+on (sc.course_num = c.course_num) join teacher t 
+on (c.teacher_num = t.teacher_num)
+where sc.student_num = #{studentNum}
+</select>
+
+<insert id="stuCourseRegist" parameterType="stuCourse">
+insert into student_course(student_num, course_num) values(#{studentNum}, #{courseNum})
+</insert>
 </mapper>

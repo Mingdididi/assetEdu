@@ -10,6 +10,7 @@ import eduConnect.domain.CourseDTO;
 public interface CourseMapper {
 	public int courseInsert(CourseDTO dto);
 	public List<CourseDTO> selectAll(String teacherNum);
+	public List<CourseDTO> allTheCourse();
 	public CourseDTO selectOne(String num);
 	public void courseUpdate(CourseDTO dto);
 	public void courseDel(String num);

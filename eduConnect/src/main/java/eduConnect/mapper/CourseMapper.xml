@@ -20,6 +20,12 @@
 	 order by course_num desc
 	</select>
 	
+	<select id="allTheCourse" resultType="course" parameterType="string">
+	select course_num courseNum , course_Name courseName , teacher_num teacherNum
+	       , course_content courseContent, course_url classRoom
+	 from course 
+	</select>
+	
 	<select id="selectOne" resultType="course" parameterType="string">
 	select course_num courseNum , course_Name courseName , teacher_num teacherNum
 	       , course_content courseContent , course_url classRoom

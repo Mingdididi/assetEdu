@@ -14,5 +14,6 @@ public class StudentAutonumService {
 	public void execute(StudentCommand studentCommand, Model model) {
 		String studentNum = studentMapper.studentAutoNum();
 		studentCommand.setStudentNum(studentNum);
+		model.addAttribute("studentCommand", studentCommand);
 	}
 }

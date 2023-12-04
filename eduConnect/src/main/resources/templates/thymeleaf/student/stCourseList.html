@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+			<!-- 리스트에 있는 값 반복 -->
+		<tr><th>수강과목</th><th>선생님</th></tr>	
+		<tr th:each="course : ${courses}">
+			 <td><a
+				th:href="@{../course/courseDetail(courseNum=${course.courseDTO.courseNum})}">[[${course.courseDTO.courseName}]]</a></td>
+			<td><td>[[${course.teacherName}]] </td>
+			
+			</tr>
+	</table>
+	<!-- 수강과목리스트 종료 -->
+	<a href="../course/courseList">강의 둘러보기</a>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="eduConnect.mapper.QuestionMapper">
+<sql id="questionBaseColumns">
+question_num, student_num, question_date, teacher_num, answer_content, answer_date, 
+update_date, question_subject, question_content
+</sql>
+<sql id="questionAliasColumns">
+question_num questionNum, student_num studentNum, question_date questionDate, 
+teacher_num teacherNum, answer_content answerContent, answer_date answerDate, 
+update_date updateDate, question_subject questionSubject, question_content questionContent
+</sql>
+<select id="autoNum"  resultType="string">
+select concat('qa' , coalesce(max(substr(question_num,3)::Integer),100000) + 1) from qa_table
+</select>
+
+<insert id="questionInsert" parameterType="question" >
+	insert into qa_table( <include refid="questionBaseColumns" /> )
+	values( #{questionNum},#{studentNum} ,now(), #{teacherNum},#{answerContent},#{answerDate}
+	 ,#{updateDate}  ,#{questionSubject}  ,#{questionContent})
+</insert>
+
+<select id="questionAllSelect" resultType="question" parameterType="startEndPageDTO" >
+select *
+from   (select ROW_NUMBER() OVER (ORDER BY question_num) AS rn, <include refid="questionAliasColumns" />
+		from (select <include refid="questionBaseColumns" />
+			from qa_table
+			<if test="searchWord != null">
+			where question_subject  like '%' || #{searchWord} || '%'  
+			   or question_content  like '%' || #{searchWord} || '%'  
+			   or answer_content like '%' || #{searchWord} || '%'
+			</if>
+		) sub1 ) sub2
+where rn between #{startRow}  and #{endRow}
+</select>
+
+<select id="questionCount" parameterType="string" resultType="integer">
+	select count(*) from teacher
+	<if test="searchWord != null">
+		where question_subject  like '%' || #{searchWord} || '%'  
+		   or question_content  like '%' || #{searchWord} || '%'  
+		   or answer_content like '%' || #{searchWord} || '%'
+	</if>
+</select>
+
+<select id="questionOneSelect"  parameterType="string" resultType="question">
+ select <include refid="questionAliasColumns" />
+from qa_table where question_num = #{questionNum}
+</select>
+
+<update id="answerRegist" parameterType="question">
+	update qa_table
+set answer_content = #{answerContent}
+    , answer_date = now()
+    , update_date = now()
+    where question_num = #{questionNum}
+</update>
+
+<update id="answerUpdate" parameterType="question">
+	update qa_table
+set   answer_content = #{answerContent}
+	, update_date = now()
+where question_num = #{questionNum}
+</update>
+
+<delete id="questionDelete" parameterType="string">
+delete from qa_table
+where question_num = #{questionNum}
+</delete>
+</mapper>
