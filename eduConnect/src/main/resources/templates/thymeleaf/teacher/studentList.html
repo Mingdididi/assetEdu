@@ -92,7 +92,8 @@ tr:first-child {
 							<td>[[${studentInfo.studentName}]]</td>
 							<td>[[${studentInfo.studentPhone}]]</td>
 							<td>[[${studentInfo.studentEmail}]]</td>
-							<td><a href="">[[${studentInfo.attendRatio}]]</a></td>
+							<!-- teacherController에서 받음 -->
+							<td><a th:href="|attendList?courseNum=${courseNum}&studentNum=${studentInfo.studentNum}|">[[${studentInfo.attendRatio}]]</a></td>
 							<td>성적</td>
 						</tr>
 					</table>

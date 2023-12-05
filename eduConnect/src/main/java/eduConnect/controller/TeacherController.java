@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import eduConnect.command.TeacherCommand;
 import eduConnect.domain.AuthInfoDTO;
+import eduConnect.service.attend.AttendListService;
+import eduConnect.service.attend.AttendRatioService;
 import eduConnect.service.course.CourseStudentListService;
 import eduConnect.service.teacher.TeacherDetailService;
 import eduConnect.service.teacher.TeacherUpdateservice;
@@ -27,7 +29,11 @@ public class TeacherController {
 	TeacherUpdateservice teacherUpdateservice;
 	@Autowired
 	CourseStudentListService courseStudentListService;
-
+	@Autowired
+	AttendListService attendListService;
+	@Autowired
+	AttendRatioService attendRatioService;
+	
 	@RequestMapping(value= "MyPage", method=RequestMethod.GET)
 	   public String Mypage() {
 	      return "thymeleaf/teacher/Mypage";
@@ -64,7 +70,17 @@ public class TeacherController {
 	@GetMapping("studentList")
 	public String courseStudentList(@RequestParam("courseNum") String courseNum, Model model) {
 		courseStudentListService.execute(courseNum, model);
+		model.addAttribute("courseNum", courseNum);
 		return "thymeleaf/teacher/studentList";
 	}
 	
+	@GetMapping("attendList")
+	public String attendList(
+			@RequestParam("courseNum") String courseNum,
+			@RequestParam("studentNum") String studentNum
+			,Model model) {
+		attendListService.execute(courseNum, studentNum, model);
+		attendRatioService.execute(courseNum, studentNum, model);
+		return "thymeleaf/attend/attendList";
+	}
 }
