@@ -54,10 +54,14 @@ td, th {
 				<div class="w3-white w3-text-grey w3-card-4">
 					<div class="w3-container">
 						<h2>에듀 커넥트</h2>
-						<p>이름</p>
-						<p>내 정보</p>
-						<p>홈</p>
-						<p>로그아웃</p>
+						<th:block th:if="${grade=='tc'}">
+						<p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="../teacher/teacherDetail">내 정보</a></p>
+						</th:block>
+						<th:block th:if="${grade=='stu'}">
+						<p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="../student/myPage">내 정보</a></p>
+						</th:block>
+						<p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="/">홈</a></p>
+						<p><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i><a href="../login/logout">로그아웃</a></p>
 						<br>
 					</div>
 				</div>

@@ -48,7 +48,7 @@ public class CourseController {
 	//@GetMapping("courseDetail")
 	
 	@RequestMapping(value = "courseWrite", method = RequestMethod.GET)
-	public String courseWrite() {
+	public String courseWrite(CourseCommand courseCommand) {
 		return "thymeleaf/teacher/courseForm";
 	}
 	@RequestMapping(value="courseRegist" , method = RequestMethod.POST)
