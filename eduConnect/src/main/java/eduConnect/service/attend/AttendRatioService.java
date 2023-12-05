@@ -16,9 +16,7 @@ public class AttendRatioService {
 	@Autowired
 	AttendMapper attendMapper;
 	
-	public void execute(String courseNum, HttpSession session, Model model) {
-		AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
-		String studentNum = auth.getUserNum();
+	public int execute(String courseNum, String studentNum, Model model) {
 		List<AttendDTO> list = attendMapper.attendList(courseNum,studentNum );
 		int totalTestNum = 0;
 		int attendTestNum = 0;
@@ -30,5 +28,6 @@ public class AttendRatioService {
 		}
 		int attendRatio = (int)(((double)attendTestNum/totalTestNum)*100);
 		model.addAttribute("attendRatio", attendRatio);
+		return attendRatio;
 	}
 }
