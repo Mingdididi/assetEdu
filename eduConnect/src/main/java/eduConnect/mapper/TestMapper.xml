@@ -58,7 +58,7 @@ values(#{testNum}, now(), #{courseNum}, #{sessionNum})
  select t.test_num TestNum, t.test_question_num testQuestionNum, test_question_answer testQuestionAnswer
  		, student_answer studentAnswer
  from test_questions t join student_test_answer s
- on (t.test_question_num = s.test_question_num)
+ on (t.test_question_num = s.test_question_num and t.test_num = s.test_num)
 where t.test_num = (select test_num from test where course_num = #{courseNum} and session_num = #{sessionNum}) 
  and student_num = #{studentNum}
  </select>

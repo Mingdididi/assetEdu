@@ -79,7 +79,6 @@ public class TestController {
 			 @RequestParam("sessionNum") String sessionNum
 			 ,Model model, HttpSession session) {
 		testDetailService.execute(courseNum, sessionNum, model);
-		
 		testSubConfService.execute(sessionNum, courseNum, session, model);
 		return  "thymeleaf/test/testStu";
 	}
