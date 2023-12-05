@@ -46,4 +46,20 @@ where sc.student_num = #{studentNum}
 <insert id="stuCourseRegist" parameterType="stuCourse">
 insert into student_course(student_num, course_num) values(#{studentNum}, #{courseNum})
 </insert>
+
+<insert id="courseStuAdd" parameterType="stuCourse">
+insert into course_student(student_num, course_num) values(#{studentNum}, #{courseNum})
+</insert>
+
+<select id="testSelect" parameterType="string">
+select session_num from test t join course_student cs
+on(t.course_num = cs.course_num)
+where student_num = #{studentNum}
+</select>
+
+<insert id="attendInsert" parameterType="string">
+insert into attendance_records(attend_num, course_num, student_num, session_num, attend_status)
+values(select concat('att' , coalesce(max(substr(attend_num,4)::Integer),100000) + 1) from attendance_records
+	   , #{courseNum},#{studentNum},#{sessionNum},'결석')
+</insert>
 </mapper>

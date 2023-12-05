@@ -1,18 +1,20 @@
 package eduConnect.service.test;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import eduConnect.command.TestCommand;
+import eduConnect.domain.AttendDTO;
 import eduConnect.domain.TestDTO;
+import eduConnect.mapper.AttendMapper;
 import eduConnect.mapper.TestMapper;
 
 @Service
 public class TestWriteService {
 	@Autowired
 	TestMapper testMapper;
+	@Autowired
+	AttendMapper attendMapper;
 	
 	public void execute(TestCommand testCommand) {
 		TestDTO testDto = new TestDTO();
@@ -30,7 +32,6 @@ public class TestWriteService {
 			testQuestionDto.setTestQuestionAnswer(testCommand.getTestQuestionAnswer()[i-1]);
 			testMapper.testQuestionWrite(testQuestionDto);
 		}
-		
 		
 	}
 }

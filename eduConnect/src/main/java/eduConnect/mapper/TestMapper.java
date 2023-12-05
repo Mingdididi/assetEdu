@@ -15,5 +15,21 @@ public interface TestMapper {
 	public String [] testList(String courseNum);
 	public List<TestDTO> testSelectOne(@Param("courseNum") String courseNum, @Param("sessionNum") String sessionNum);
 	public void testDelete (String testNum);
+	public void testSubmit(TestDTO dto);
+	public Integer[] testsubConf(
+			@Param("sessionNum") String sessionNum,
+			@Param("courseNum") String courseNum,
+			@Param("studentNum") String studentNum
+			);
+	public String [] selectStuAnswer (
+			@Param("sessionNum") String sessionNum,
+			@Param("courseNum") String courseNum,
+			@Param("studentNum") String studentNum
+			);
+	public List<TestDTO> answerResult(
+			@Param("sessionNum") String sessionNum,
+			@Param("courseNum") String courseNum,
+			@Param("studentNum") String studentNum
+			);
 
 }

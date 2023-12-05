@@ -13,7 +13,9 @@ public class TestDTO {
 	Integer  testQuestionNum;
 	String  testQuestionContent;
 	Integer  testQuestionAnswer;
+	Integer studentAnswer;
 	Date testDate;
 	String  courseNum;
 	String testNum;
+	String StudentNum;
 }

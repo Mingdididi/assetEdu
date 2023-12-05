@@ -36,4 +36,30 @@ values(#{testNum}, now(), #{courseNum}, #{sessionNum})
  <delete id="testDelete" parameterType="string">
  	delete from test where test_num = #{testNum}
  </delete>
+ 
+ <insert id="testSubmit" parameterType="test">
+ insert into student_test_answer ( test_num , test_question_num , course_num 
+ 									,student_num , student_answer)
+ values (#{testNum}, #{testQuestionNum}, #{courseNum}, #{StudentNum}, #{testQuestionAnswer})
+ </insert>
+ 
+ <select id="testsubConf" resultType="integer">
+ select 1 from student_test_answer where test_num = (select test_num from test where course_num = #{courseNum} and session_num = #{sessionNum}) 
+ and student_num = #{studentNum}
+ </select>
+ 
+ <select id="selectStuAnswer" resultType="String">
+ select student_answer from  student_test_answer 
+ where test_num = (select test_num from test where course_num = #{courseNum} and session_num = #{sessionNum}) 
+ and student_num = #{studentNum}
+ </select>
+ 
+ <select id="answerResult" resultType="test">
+ select t.test_num TestNum, t.test_question_num testQuestionNum, test_question_answer testQuestionAnswer
+ 		, student_answer studentAnswer
+ from test_questions t join student_test_answer s
+ on (t.test_question_num = s.test_question_num)
+where t.test_num = (select test_num from test where course_num = #{courseNum} and session_num = #{sessionNum}) 
+ and student_num = #{studentNum}
+ </select>
 </mapper>
