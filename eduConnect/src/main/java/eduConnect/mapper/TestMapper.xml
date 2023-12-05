@@ -66,4 +66,16 @@ where t.test_num = (select test_num from test where course_num = #{courseNum} an
  <select id="studentSelect" parameterType="string" resultType="string">
  select student_num from course_student where course_num = #{courseNum}
  </select>
+ 
+ <select id="studentAllResult" resultType="test">
+ select  session_num sessionNum, t.test_question_num testQuestionNum, test_question_answer testQuestionAnswer
+ 		, student_answer studentAnswer
+ from test_questions t right outer join student_test_answer s
+ on (t.test_question_num = s.test_question_num) join test tt
+ on (t.test_num = tt.test_num)
+ where tt.course_num = #{courseNum} and student_num = #{studentNum}
+ </select>
+ <select id="testSessionCount" parameterType="string" resultType="Integer">
+  select COUNT(*) from test where course_num = #{courseNum};
+ </select>
 </mapper>

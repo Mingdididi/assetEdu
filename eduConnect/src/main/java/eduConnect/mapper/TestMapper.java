@@ -32,4 +32,11 @@ public interface TestMapper {
 			@Param("studentNum") String studentNum
 			);
 	public String [] studentSelect(String courseNum);
+	
+	public List<TestDTO> studentAllResult(
+			@Param("courseNum") String courseNum,
+			@Param("studentNum") String studentNum
+			);
+	
+	public Integer testSessionCount(String courseNum);
 }

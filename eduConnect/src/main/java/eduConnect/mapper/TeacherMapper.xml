@@ -69,4 +69,5 @@ where teacher_num = #{teacherNum}
 delete from teacher where teacher_num = #{teacherNum}
 </delete>
 
+
 </mapper>
