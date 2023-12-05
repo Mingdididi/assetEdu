@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel='stylesheet'
-	href='https://fonts.googleapis.com/css?family=Roboto'>
+   href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -25,56 +25,56 @@
 </script>
 <style>
 body {
-	font-family: 'Arial', sans-serif;
+   font-family: 'Arial', sans-serif;
 }
 
 table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 20px;
+   width: 100%;
+   border-collapse: collapse;
+   margin-bottom: 20px;
 }
 
 th, td {
-	border: 1px solid #ddd;
-	padding: 8px;
-	text-align: left;
+   border: 1px solid #ddd;
+   padding: 8px;
+   text-align: left;
 }
 
 th {
-	background-color: #f2f2f2;
+   background-color: #f2f2f2;
 }
 
 input, textarea, button {
-	box-sizing: border-box;
+   box-sizing: border-box;
 }
 
 input {
-	width: 70px; /* 번호와 답의 너비를 조절 */
+   width: 70px; /* 번호와 답의 너비를 조절 */
 }
 
 textarea {
-	width: 100%;
+   width: 100%;
 }
 
 button {
-	cursor: pointer;
-	background-color: #2E8B57; /* 짙은 녹색 */
-	color: white;
-	border: none;
-	padding: 8px 12px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 14px;
-	margin: 4px 2px;
-	transition-duration: 0.4s;
-	border-radius: 4px;
+   cursor: pointer;
+   background-color: #2E8B57; /* 짙은 녹색 */
+   color: white;
+   border: none;
+   padding: 8px 12px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 14px;
+   margin: 4px 2px;
+   transition-duration: 0.4s;
+   border-radius: 4px;
 }
 
 button:hover {
-	background-color: white;
-	color: black;
-	border: 1px solid #2E8B57; /* 짙은 녹색 */
+   background-color: white;
+   color: black;
+   border: 1px solid #2E8B57; /* 짙은 녹색 */
 }
 
 
@@ -100,107 +100,107 @@ button:hover {
 
 <body class="w3-light-grey">
 
-	<!-- Page Container -->
-	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
+   <!-- Page Container -->
+   <div class="w3-content w3-margin-top" style="max-width: 1400px;">
 
-		<!-- The Grid -->
-		<div class="w3-row-padding">
+      <!-- The Grid -->
+      <div class="w3-row-padding">
 
-			<!-- Left Column -->
-			<div class="w3-third">
+         <!-- Left Column -->
+         <div class="w3-third">
 
-				<div class="w3-white w3-text-grey w3-card-4">
-					<div class="w3-container">
-						<h2>에듀 커넥트</h2>
-						<p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="myPage">내 정보</a></p>
-						<p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="/">홈</a></p>
-						<p><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i><a href="../login/logout">로그아웃</a></p>
-						<br>
-					</div>
-				</div>
-				<br>
+            <div class="w3-white w3-text-grey w3-card-4">
+               <div class="w3-container">
+                  <h2>에듀 커넥트</h2>
+                  <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="myPage">내 정보</a></p>
+                  <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="/">홈</a></p>
+                  <p><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i><a href="../login/logout">로그아웃</a></p>
+                  <br>
+               </div>
+            </div>
+            <br>
 
-				<!-- End Left Column -->
-			</div>
+            <!-- End Left Column -->
+         </div>
 
-			<!-- Right Column -->
-			<div class="w3-twothird">
+         <!-- Right Column -->
+         <div class="w3-twothird">
 
-				<div class="w3-container w3-card w3-white w3-margin-bottom">
-				<div th:if="${conf != null}">
-					<h2 class="w3-text-grey w3-padding-16">시험 결과</h2>
-				</div>
-				<div th:if="${conf == null}">
-				<h2 class="w3-text-grey w3-padding-16">시험 보기</h2>
-				</div>
-					<form action="testSubmit" method="post">
-					회차 번호 : [[${dtos.get(0).sessionNum}]]
-					등록일 : [[${#dates.format(dtos.get(0).testDate,'yyyy-MM-dd') }]]
-					<input type="hidden" th:value="${dtos.get(0).testNum}" name="testNum">
-					<input type="hidden" th:value="${dtos.get(0).courseNum}" name="courseNum">
-					<input type="hidden" th:value="${dtos.get(0).sessionNum}" name="sessionNum">
-					<table id="myTable">
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>문제</th>
-								<th>답</th>
-								
-							</tr>
-						</thead>
-						<tbody>
-						<div th:if="${conf == null}">
-							<tr th:each="dto:${dtos}">
-								<th>[[${dto.testQuestionNum}]]</th>
-								<input type="hidden" name="testQuestionNum" th:value="${dto.testQuestionNum}">
-								<td><textarea  readonly="readonly">[[${dto.testQuestionContent}]]</textarea></td>
-								<td><input type="number" name="testQuestionAnswer" value="1" min="1"></td>
-							</tr>
-						</div>
-						
-						<div th:if="${conf != null}">
-							<tr th:each="dto :${dtos}">
-								<th>[[${dto.testQuestionNum}]]</th>
-								<td><textarea  readonly="readonly">[[${dto.testQuestionContent}]]</textarea></td>
-								<td ><span th:text="${answer[dtos.indexOf(dto)] }"></span>
-									<span th:text="${result[dtos.indexOf(dto)]}" class="resultSpan"></span></td>
-							</tr>
-							<tr><td colspan="3">문항 수: [[${totalQuestion}]] | 정답 수: [[${rightAnswer}]] | 점수: [[${score}]]</td></tr>
-						</div>
-						</tbody>
-							
-					</table>
-					<div th:if="${conf == null}">
-					<input type="submit" value="시험 제출">
-					</div>
-				</form> 
-			
+            <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <div th:if="${conf != null}">
+               <h2 class="w3-text-grey w3-padding-16">시험 결과</h2>
+            </div>
+            <div th:if="${conf == null}">
+            <h2 class="w3-text-grey w3-padding-16">시험 보기</h2>
+            </div>
+               <form action="testSubmit" method="post">
+               회차 번호 : [[${dtos.get(0).sessionNum}]]
+               등록일 : [[${#dates.format(dtos.get(0).testDate,'yyyy-MM-dd') }]]
+               <input type="hidden" th:value="${dtos.get(0).testNum}" name="testNum">
+               <input type="hidden" th:value="${dtos.get(0).courseNum}" name="courseNum">
+               <input type="hidden" th:value="${dtos.get(0).sessionNum}" name="sessionNum">
+               <table id="myTable">
+                  <thead>
+                     <tr>
+                        <th>번호</th>
+                        <th>문제</th>
+                        <th>답</th>
+                        
+                     </tr>
+                  </thead>
+                  <tbody>
+                  <div th:if="${conf == null}">
+                     <tr th:each="dto:${dtos}">
+                        <th>[[${dto.testQuestionNum}]]</th>
+                        <input type="hidden" name="testQuestionNum" th:value="${dto.testQuestionNum}">
+                        <td><textarea  readonly="readonly">[[${dto.testQuestionContent}]]</textarea></td>
+                        <td><input type="number" name="testQuestionAnswer" value="1" min="1"></td>
+                     </tr>
+                  </div>
+                  
+                  <div th:if="${conf != null}">
+                     <tr th:each="dto :${dtos}">
+                        <th>[[${dto.testQuestionNum}]]</th>
+                        <td><textarea  readonly="readonly">[[${dto.testQuestionContent}]]</textarea></td>
+                        <td ><span th:text="${answer[dtos.indexOf(dto)] }"></span>
+                           <span th:text="${result[dtos.indexOf(dto)]}" class="resultSpan"></span></td>
+                     </tr>
+                     <tr><td colspan="3">문항 수: [[${totalQuestion}]] | 정답 수: [[${rightAnswer}]] | 점수: [[${score}]]</td></tr>
+                  </div>
+                  </tbody>
+                     
+               </table>
+               <div th:if="${conf == null}">
+               <input type="submit" value="시험 제출">
+               </div>
+            </form> 
+         
 
-				</div>
-					
-			</div>
+            </div>
+               
+         </div>
 
-			<!-- End Right Column -->
-		</div>
+         <!-- End Right Column -->
+      </div>
 
-		<!-- End Grid -->
-	</div>
+      <!-- End Grid -->
+   </div>
 
-	<!-- End Page Container -->
+   <!-- End Page Container -->
 
-	<footer class="w3-container w3-teal w3-center w3-margin-top">
-		<p>Find me on social media.</p>
-		<i class="fa fa-facebook-official w3-hover-opacity"></i> <i
-			class="fa fa-instagram w3-hover-opacity"></i> <i
-			class="fa fa-snapchat w3-hover-opacity"></i> <i
-			class="fa fa-pinterest-p w3-hover-opacity"></i> <i
-			class="fa fa-twitter w3-hover-opacity"></i> <i
-			class="fa fa-linkedin w3-hover-opacity"></i>
-		<p>
-			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
-				target="_blank">w3.css</a>
-		</p>
-	</footer>
+   <footer class="w3-container w3-teal w3-center w3-margin-top">
+      <p>Find me on social media.</p>
+      <i class="fa fa-facebook-official w3-hover-opacity"></i> <i
+         class="fa fa-instagram w3-hover-opacity"></i> <i
+         class="fa fa-snapchat w3-hover-opacity"></i> <i
+         class="fa fa-pinterest-p w3-hover-opacity"></i> <i
+         class="fa fa-twitter w3-hover-opacity"></i> <i
+         class="fa fa-linkedin w3-hover-opacity"></i>
+      <p>
+         Powered by <a href="https://www.w3schools.com/w3css/default.asp"
+            target="_blank">w3.css</a>
+      </p>
+   </footer>
 </body>
 
 </html>

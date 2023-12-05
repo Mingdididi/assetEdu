@@ -113,7 +113,9 @@ td, th {
 							    </th:block> <th:block th:if="${page >= maxPage}"> [다음] </th:block></th>
 							</tr>
 						</table>
+				<th:block th:if="${grade=='stu'}">
 				<a th:href="|questionRegist?courseNum=${courseNum}|">질문하기</a>
+				</th:block>
 				</div>
 
 			</div>
