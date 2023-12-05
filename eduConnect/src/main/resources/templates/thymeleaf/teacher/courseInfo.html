@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+<title>W3.CSS Template</title>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html, body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Roboto", sans-serif
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+table {
+	width: 800px;
+	border-collapse: collapse;
+	margin-bottom: 40px;
+	margin-left: 38px;
+}
+td, th {
+	border: 1px solid #dddddd;
+	padding: 8px;
+}
+
+   tr:first-child {
+        background-color: #f2f2f2; /* 연한 회색 배경색 */
+        margin-bottom: 10px; /* 첫 번째 행 아래 간격 조절 */
+    }
+
+</style>
 </head>
-<body>
 
-강사번호 : [[${dto.teacherNum}]]<br/>
-강의제목 : [[${dto.courseName}]]<br/>
+<body class="w3-light-grey">
 
+<<<<<<< HEAD
 <!-- 선생님 입장 -->
 <div th:block th:if="${session.auth.grade=='tc'}">
 강의실 : <a th:href="${dto.classRoom}">[[${dto.classRoom}]]</a><br/>
@@ -17,9 +51,46 @@
 <a th:href="|../teacher/studentList?courseNum=${dto.courseNum}|">학생 목록</a>
 <a th:href="|courseUpdate?courseNum=${dto.courseNum}|">수정</a>|  
 <a th:href="@{courseDel(courseNum=${dto.courseNum})}">삭제</a>  | 
+=======
+	<!-- Page Container -->
+	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
+
+		<!-- The Grid -->
+		<div class="w3-row-padding">
+
+			<!-- Left Column -->
+			<div class="w3-third">
+
+				<div class="w3-white w3-text-grey w3-card-4">
+					<div class="w3-container">
+						<h2>에듀 커넥트</a></h2>
+						<p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="../teacher/teacherDetail">내 정보</a></p>
+						<p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="/">홈</a></p>
+						<p><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i><a href="../login/logout">로그아웃</a></p>
+						<br>
+					</div>
+				</div>
+				<br>
+
+				<!-- End Left Column -->
+			</div>
+
+			<!-- Right Column -->
+			<div class="w3-twothird">
+
+				<div class="w3-container w3-card w3-white w3-margin-bottom">
+					<h2 class="w3-text-grey w3-padding-16">[[${dto.courseName}]]</h2>
+						<!-- 선생님 입장 -->
+<div th:block th:if="${session.auth.grade=='tc'}">
+<a th:href="${dto.classRoom}">강의실</a><hr/>
+<a th:href="|../test/testList?courseNum=${dto.courseNum}|">시험</a><hr/>
+출석<hr/>
+<a th:href="|../teacher/studentList?courseNum=${dto.courseNum}|">학생 목록</a><hr/>
+<a th:href="|courseUpdate?courseNum=${dto.courseNum}|">수정</a> | 
+<a th:href="@{courseDel(courseNum=${dto.courseNum})}">삭제</a>  |
+>>>>>>> branch 'master' of https://github.com/YeeunGo/eduConnect.git
 <a href="courseList">강의목록</a>
 </div>
-
 <!-- 학생 입장 -->
 <div th:block th:if="${session.auth.grade=='stu'}"><!-- 수강중이면 '수강중'으로 바꾸기 -->
 	<th:block th:if="${courseRegisterd==0}">
@@ -33,5 +104,32 @@
 		<a th:href="|../attend/attendList?courseNum=${dto.courseNum}|">출석</a>
 	</th:block>
 </div>
+				</div>
+
+			</div>
+
+			<!-- End Right Column -->
+		</div>
+
+		<!-- End Grid -->
+	</div>
+
+	<!-- End Page Container -->
+
+	<footer class="w3-container w3-teal w3-center w3-margin-top">
+		<p>Find me on social media.</p>
+		<i class="fa fa-facebook-official w3-hover-opacity"></i> <i
+			class="fa fa-instagram w3-hover-opacity"></i> <i
+			class="fa fa-snapchat w3-hover-opacity"></i> <i
+			class="fa fa-pinterest-p w3-hover-opacity"></i> <i
+			class="fa fa-twitter w3-hover-opacity"></i> <i
+			class="fa fa-linkedin w3-hover-opacity"></i>
+		<p>
+			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
+				target="_blank">w3.css</a>
+		</p>
+	</footer>
+
 </body>
+
 </html>
