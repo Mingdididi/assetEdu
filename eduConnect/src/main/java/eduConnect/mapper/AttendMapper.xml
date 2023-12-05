@@ -16,4 +16,12 @@ where student_num = #{studentNum}
 and course_num = #{courseNum}
 and session_num = #{sessionNum}
 </update>
+
+<select id="attendList" resultType="attend">
+select attend_num attendNum, course_num courseNum, student_num studentNum, session_num sessionNum, attend_status attendStatus
+from attendance_records
+where course_num = #{courseNum}
+and student_num = #{studentNum}
+order by session_num
+</select>
 </mapper>

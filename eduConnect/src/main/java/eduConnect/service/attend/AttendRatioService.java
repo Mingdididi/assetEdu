@@ -12,15 +12,23 @@ import eduConnect.mapper.AttendMapper;
 import jakarta.servlet.http.HttpSession;
 
 @Service
-public class AttendListService {
+public class AttendRatioService {
 	@Autowired
 	AttendMapper attendMapper;
 	
 	public void execute(String courseNum, HttpSession session, Model model) {
-		
 		AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
 		String studentNum = auth.getUserNum();
 		List<AttendDTO> list = attendMapper.attendList(courseNum,studentNum );
-		model.addAttribute("list", list);
+		int totalTestNum = 0;
+		int attendTestNum = 0;
+		for(AttendDTO dto : list) {
+			totalTestNum += 1;
+			if(dto.getAttendStatus().trim().equals("출석")) {
+				attendTestNum += 1;
+			}
+		}
+		int attendRatio = (int)(((double)attendTestNum/totalTestNum)*100);
+		model.addAttribute("attendRatio", attendRatio);
 	}
 }
