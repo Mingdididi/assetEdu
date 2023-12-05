@@ -10,6 +10,6 @@ public class AttendDTO {
 	String attendNum;
 	String courseNum;
 	String studentNum;
-	Integer sessioNum;
+	Integer sessionNum;
 	String attendStatus;
 }

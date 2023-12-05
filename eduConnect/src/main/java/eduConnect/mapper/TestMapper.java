@@ -31,5 +31,5 @@ public interface TestMapper {
 			@Param("courseNum") String courseNum,
 			@Param("studentNum") String studentNum
 			);
-
+	public String [] studentSelect(String courseNum);
 }

@@ -17,7 +17,7 @@ public interface StudentMyMapper {
 	public int studentCourseRegistered(@Param("studentNum")String studentNum, @Param("courseNum")String courseNum);
 	public void stuCourseRegist(StuCourseDTO dto);
 	public void courseStuAdd(StuCourseDTO dto);
-	public int [] testSelect(String studentNum);
+	public String [] testSelect(String studentNum);
 	public void attendInsert(@Param("studentNum") String studentNum, 
 							@Param("sessionNum") int sessionNum
 							,@Param("courseNum") String courseNum);

@@ -32,6 +32,18 @@ public class TestWriteService {
 			testQuestionDto.setTestQuestionAnswer(testCommand.getTestQuestionAnswer()[i-1]);
 			testMapper.testQuestionWrite(testQuestionDto);
 		}
+		// 해당 과목을 수강중인 학생들
+		String studentNums [] = testMapper.studentSelect(testCommand.getCourseNum());
+		if(studentNums.length != 0) {
+			AttendDTO attDto = new AttendDTO();
+			attDto.setCourseNum(testCommand.getCourseNum());
+			attDto.setSessionNum(testCommand.getSessionNum());
+			for(String studentNum : studentNums) {
+				attDto.setStudentNum(studentNum);
+				attendMapper.attendWrite(attDto);
+			}
+			
+		}
 		
 	}
 }
