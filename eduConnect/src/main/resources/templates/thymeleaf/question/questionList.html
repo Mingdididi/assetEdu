@@ -78,6 +78,7 @@ td, th {
 					
 					<!-- 질문 목록 리스트 -->
 					<form action="questionList" method="post">
+						<input type="hidden" name="courseNum" th:value="${courseNum}"/>
 						<input type="search" name="searchWord" size=50 
 							th:value="${searchWord}" /> <input type="submit" value="검색" />
 					</form><br/>

@@ -30,7 +30,7 @@ where rn between #{startRow}  and #{endRow}
 </select>
 
 <select id="questionCount" parameterType="string" resultType="integer">
-	select count(*) from teacher
+	select count(*) from qa_table
 	<if test="searchWord != null">
 		where question_subject  like '%' || #{searchWord} || '%'  
 		   or question_content  like '%' || #{searchWord} || '%'  

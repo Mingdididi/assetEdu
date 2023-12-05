@@ -1,65 +1,76 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+<title>W3.CSS Template</title>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.right-align {
+        text-align: right;
+    }
+html, body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Roboto", sans-serif
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+table {
+	border-collapse: collapse;
+	
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	padding: 8px;
+}
+
+tr:first-child {
+	background-color: #f2f2f2; /* 연한 회색 배경색 */
+	margin-bottom: 10px; /* 첫 번째 행 아래 간격 조절 */
+}
+
+.w3-third {
+	margin: 20px auto; /* 상하단 패딩을 조절하여 높이를 크게 조절 */
+	margin-bottom: 40px auto;
+	float: none;
+	width: 70%; /* 필요에 따라 너비 조절 */
+}
+
+/* "에듀커넥트" 텍스트를 가운데 정렬하고 색상과 굵기 조절 */
+.w3-third h2 {
+	text-align: center;
+	color: #006400; /* 진녹색 */
+	font-weight: bold; /* 굵게 */
+	margin-top: 20px; /* 텍스트와 상단 간격 조절 */
+}
+</style>
 </head>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/static/js/daumAddressScript.js"></script>
-<script type="text/javascript">
-$(function(){
-	$("#studentId").on("change keyup",function(){
-		$.ajax({
-			type:'post',
-			url:"/login/userIdCheck",
-			data:{"userId":$("#studentId").val()},
-			dataType:'text',
-			success:function(result){
-				$("#idCheck").text(result);
-				if(result.trim() == "사용가능한 아이디입니다."){
-					$("#idCheck").css("color","blue");
-				}else{
-					$("#idCheck").css("color","red");
-				}
-			},
-			error:function(){
-				
-			}
-		});
-	});
-	$("#studentEmail").on("change keyup",function(){
-		$.ajax({
-			type:'post',
-			url:"/checkRest/userEmailCheck",
-			data:{"userEmail":$("#studentEmail").val()},
-			dataType:'text',
-			success:function(result){
-				$("#emailCheck").text(result);
-				if(result.trim()=="사용가능한 이메일입니다."){
-					$("#emailCheck").css("color","blue");
-				}else{$("#emailCheck").css("color","red")};
-			},
-			error:function(){
-				
-			}
-		});
-	});
-	$("#frm").submit(function(){
-		if($("#idCheck").text()=="" || $("#idCheck").text()=="사용중인 아이디입니다."){
-			alert("아이디 중복확인을 해주세요");
-			return false;
-		}
-		if($("#emailCheck").text()=="" || $("emailCheck").text()=="사용중인 이메일입니다."){
-			alert("이메일 중복확인을 해주세요");
-			return false;
-		}
-	});
-});
-</script>
-</head>
-<body>
-<form action="userWrite" method="post" th:object="${studentCommand}" id="frm">
+
+<body class="w3-light-grey">
+
+	<!-- Page Container -->
+	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
+
+		<!-- The Grid -->
+		<div class="w3-row-padding">
+
+			<!-- Left Column -->
+			<div class="w3-third">
+
+				<div class="w3-white w3-text-grey w3-card-4">
+					<div class="w3-container">
+						<h2>회원가입</h2>
+						<form action="userWrite" method="post" th:object="${studentCommand}" id="frm">
 <input type="hidden" name="studentNum" th:value="${studentCommand.studentNum}" />
 아이디 : <input type="text" name="studentId" id="studentId" 
 										th:value="${studentCommand.studentId}"/><br />
@@ -93,5 +104,19 @@ $(function(){
 <span style="color:red" th:if="${#fields.hasErrors('studentBirth')}" th:errors="*{studentBirth}"></span><br />										
 <input type="submit" value="회원등록" />
 </form>
+						</div>
+				<br>
+				</div>
+				<!-- End Left Column -->
+			</div>
+			<!-- Right Column -->
+		
+		<!-- End Grid -->
+	</div>
+
+	<!-- End Page Container -->
+
+
 </body>
+
 </html>
