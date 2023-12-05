@@ -24,6 +24,7 @@ public class TestSubConfService {
 	public void execute(String sessionNum, String courseNum, HttpSession session, Model model) {
 		AuthInfoDTO auth= (AuthInfoDTO) session.getAttribute("auth");
 		String studentNum = auth.getUserNum();
+		// 시험을 학생이 봤는 지 안봤는지 확인하는 Mapper
 		Integer i[] = testMapper.testsubConf(sessionNum, courseNum, studentNum);
 		Integer j = null;
 		if(i.length != 0) {
@@ -31,9 +32,11 @@ public class TestSubConfService {
 		}
 		if(j != null) {
 			
+			// 학생이 답한 답안
 			String answer [] = testMapper.selectStuAnswer(sessionNum, courseNum, studentNum);
 			model.addAttribute("answer", answer);
 			
+			// 학생 답안과 정답 동시 select
 			List<TestDTO> list = testMapper.answerResult(sessionNum, courseNum, studentNum);
 			List<String> result = new ArrayList<>();
 			int totalQuestion = 0;
@@ -48,13 +51,6 @@ public class TestSubConfService {
 				}
 		}
 		int score = (int)((double)rightAnswer/totalQuestion *100);
-		
-		AttendDTO attDto = new AttendDTO();
-		attDto.setCourseNum(courseNum);
-		attDto.setStudentNum(studentNum);
-		attDto.setSessionNum(Integer.parseInt(sessionNum));
-
-		attendMapper.attendWrite(attDto);
 		
 		System.out.println("실행");
 		System.out.println(totalQuestion);
