@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import eduConnect.command.CourseCommand;
+import eduConnect.domain.AuthInfoDTO;
 import eduConnect.service.course.CourseDelService;
 import eduConnect.service.course.CourseDetailService;
 import eduConnect.service.course.CourseListService;
 import eduConnect.service.course.CourseModifyService;
 import eduConnect.service.course.CourseWriteService;
+import eduConnect.service.student.StuCourseListService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -30,7 +32,9 @@ public class CourseController {
 	CourseModifyService courseModifyService;
 	@Autowired
 	CourseDelService courseDelService;
-
+	@Autowired
+	StuCourseListService stuCourseListService;
+	
 	@RequestMapping(value = "MyPage", method = RequestMethod.GET)
 	public String Mypage() {
 		return "thymeleaf/teacher/Mypage";
@@ -54,12 +58,14 @@ public class CourseController {
 	}
 	@GetMapping(value="courseDetail")
 	public String courseDetail(HttpSession session, Model model, @RequestParam(value = "courseNum")String courseNum) {
-		courseDetailService.execute(model, courseNum);
+		AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
+		String studentNum = auth.getUserNum();
+		courseDetailService.execute(model, courseNum, studentNum);
 		return "thymeleaf/teacher/courseInfo";
 	}
 	@RequestMapping(value="courseUpdate", method = RequestMethod.GET)
 	public String courseUpdate(Model model, @RequestParam(value = "courseNum") String courseNum) {
-		courseDetailService.execute(model, courseNum);
+		courseDetailService.execute(model, courseNum, null);
 		return "thymeleaf/teacher/courseModifyForm";
 	}
 

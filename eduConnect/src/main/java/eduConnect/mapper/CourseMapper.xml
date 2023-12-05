@@ -45,5 +45,4 @@
 	where course_num = #{courseNum}
 	
 	</delete>
-	
 	</mapper>

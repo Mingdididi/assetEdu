@@ -97,8 +97,7 @@ public class QuestionController {
 		answerRegisterService.execute(questionNum, questionCommand);
 		return "redirect:questionDetail?questionNum="+questionCommand.getQuestionNum();
 		
-	}
-	
+	}	
 	@RequestMapping(value = "answerUpdate", method = RequestMethod.GET)
 	public String answerUpdateForm(@RequestParam(value="questionNum")Integer questionNum, QuestionCommand questionCommand, Model model) {
 		questionDetailService.execute(questionNum, model);

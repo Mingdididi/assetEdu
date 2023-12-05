@@ -62,4 +62,12 @@ insert into attendance_records(attend_num, course_num, student_num, session_num,
 values(select concat('att' , coalesce(max(substr(attend_num,4)::Integer),100000) + 1) from attendance_records
 	   , #{courseNum},#{studentNum},#{sessionNum},'결석')
 </insert>
+
+<select id="studentCourseRegistered" resultType="int">
+    SELECT CASE WHEN EXISTS (
+        SELECT 1
+        FROM student_course
+        WHERE student_num = #{studentNum} AND course_num = #{courseNum}
+    ) THEN 1 ELSE 0 END AS row_exists
+</select>
 </mapper>

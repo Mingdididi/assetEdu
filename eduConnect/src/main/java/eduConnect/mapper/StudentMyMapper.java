@@ -14,6 +14,7 @@ public interface StudentMyMapper {
 	public void studentUpdate(StudentDTO dto);
 	public void studentDelete(String studentNum);
 	public List<StuCoursePlusDTO> stuCourseList(String studentNum);
+	public int studentCourseRegistered(@Param("studentNum")String studentNum, @Param("courseNum")String courseNum);
 	public void stuCourseRegist(StuCourseDTO dto);
 	public void courseStuAdd(StuCourseDTO dto);
 	public int [] testSelect(String studentNum);

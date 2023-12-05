@@ -101,7 +101,6 @@ tr:first-child {
 								</table>
 							</form>
 						</div>
-<<<<<<< HEAD
 						<div th:block th:if="${session.auth != null}" class="right-align"><!-- 로그인한경우 -->
 						
 							<span th:block th:if="${session.auth.grade == 'stu'}">
@@ -123,67 +122,17 @@ tr:first-child {
 						</div>
 						<!-- 로그인한경우 끝 -->
 						<hr>
-						<div>
+						<div style="text-align: center;">
 						    <img src="/static/images/mainimg.png" alt="MainImage"><br/>
-=======
-						<div th:if="${session.auth != null}">
-							<div th:block th:if="${session.auth.grade == 'stu'}">
-								학생
-								<a href="/student/myPage">마이페이지</a>
-								<a href="/student/course">과목</a>
-								</div>
-
-							</th:block>
-							<th:block th:if="${session.auth.grade == 'tc'}">
-								선생
-								<a href="teacher/MyPage">마이페이지</a>
-															</th:block>
-							<th:block th:if="${session.auth.grade == 'ma'}">
-								관리자<br>
-								<a href="teacherRg/teacherList">선생님 목록</a>
-								<br>
-							</th:block>
-							<li><a href="login/logout">로그아웃</a></li>
->>>>>>> branch 'master' of https://github.com/YeeunGo/eduConnect.git
+						
 						</div>
-					</div>
 				</div>
 				<br>
 				</div>
 				<!-- End Left Column -->
-<<<<<<< HEAD
-=======
 			</div>
 			<!-- Right Column -->
-			<div class="w3-twothird">
-	
-				<div class="w3-container w3-card w3-white w3-margin-bottom">
-					<!--  나중에 삭제 -->
-					<h2 class="w3-text-grey w3-padding-16">선생님 목록</h2>
-
-					<!-- 선생님 목록 리스트 -->
-					오른쪽 상자
-					<!-- 선생님 목록리스트 종료 -->
-					<a href="teacherRg/teacherRegist">선생님 등록</a>
-				</div>
-				<!--  학생 로그인 시 -->
-				<div class="w3-container w3-card w3-white w3-margin-bottom">
-				<div th:if = "${session.auth!=null}">
-					<div th:if = "${session.auth.grade=='stu'}">
-						<h2 class="w3-text-grey w3-padding-16"><a href="student/course"/>수강 과목</h2>
-					</div>
-				</div>
-				
-
-			</div>
-
-			<!-- End Right Column -->
->>>>>>> branch 'master' of https://github.com/YeeunGo/eduConnect.git
-		</div>
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/YeeunGo/eduConnect.git
+		
 		<!-- End Grid -->
 	</div>
 
