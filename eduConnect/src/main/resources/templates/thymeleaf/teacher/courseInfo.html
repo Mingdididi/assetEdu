@@ -75,7 +75,6 @@ td, th {
 <div th:block th:if="${session.auth.grade=='tc'}">
 <a th:href="${dto.classRoom}">강의실</a><hr/>
 <a th:href="|../test/testList?courseNum=${dto.courseNum}|">시험</a><hr/>
-출석<hr/>
 <a th:href="|../teacher/studentList?courseNum=${dto.courseNum}|">학생 목록</a><hr/>
 <a th:href="|courseUpdate?courseNum=${dto.courseNum}|">수정</a> | 
 <a th:href="@{courseDel(courseNum=${dto.courseNum})}">삭제</a>  |
