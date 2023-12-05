@@ -62,4 +62,8 @@ values(#{testNum}, now(), #{courseNum}, #{sessionNum})
 where t.test_num = (select test_num from test where course_num = #{courseNum} and session_num = #{sessionNum}) 
  and student_num = #{studentNum}
  </select>
+ 
+ <select id="studentSelect" parameterType="string" resultType="string">
+ select student_num from course_student where course_num = #{courseNum}
+ </select>
 </mapper>

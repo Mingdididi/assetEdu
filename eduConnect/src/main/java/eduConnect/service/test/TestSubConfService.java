@@ -52,7 +52,7 @@ public class TestSubConfService {
 		AttendDTO attDto = new AttendDTO();
 		attDto.setCourseNum(courseNum);
 		attDto.setStudentNum(studentNum);
-		attDto.setSessioNum(Integer.parseInt(sessionNum));
+		attDto.setSessionNum(Integer.parseInt(sessionNum));
 
 		attendMapper.attendWrite(attDto);
 		

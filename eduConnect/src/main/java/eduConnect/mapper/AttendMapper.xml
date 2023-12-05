@@ -4,6 +4,8 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="eduConnect.mapper.AttendMapper">
 <insert id="attendWrite" parameterType="attend">
-
+insert into attendance_records(attend_num, course_num, student_num, session_num, attend_status)
+values((select concat('att' , coalesce(max(substr(attend_num,4)::Integer),100000) + 1) from attendance_records)
+	   , #{courseNum},#{studentNum},#{sessionNum},'결석')
 </insert>
 </mapper>
