@@ -3,8 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>attendList</title>
+    <style>
+        .attend-status-attend {
+            color: blue;
+        }
+
+        .attend-status-absent {
+            color: red;
+        }
+    </style>
+ <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.attend-status').each(function () {
+                var attendStatus = $(this).text();
+                if (attendStatus === '출석') {
+                    $(this).addClass('attend-status-attend');
+                } else if (attendStatus === '결석') {
+                    $(this).addClass('attend-status-absent');
+                }
+            });
+        });
+    </script>
 </head>
 <body>
-
+출석 현황
+<table>
+<tr><td>회차</td><td>출석/결석</td></tr>
+<tr th:each="attDto : ${list}">
+<td>[[${attDto.sessionNum}]]</td><td> <span th:text="${attDto.attendStatus}" class="attend-status"></span></td>
+</tr>
+<tr><td colspan="2">출석률 :[[${attendRatio}]] </td></tr>
+</table>
 </body>
 </html>
