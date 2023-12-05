@@ -42,7 +42,7 @@ td, th {
 
 <body class="w3-light-grey">
 
-<<<<<<< HEAD
+
 <!-- 선생님 입장 -->
 <div th:block th:if="${session.auth.grade=='tc'}">
 강의실 : <a th:href="${dto.classRoom}">[[${dto.classRoom}]]</a><br/>
@@ -51,7 +51,7 @@ td, th {
 <a th:href="|../teacher/studentList?courseNum=${dto.courseNum}|">학생 목록</a>
 <a th:href="|courseUpdate?courseNum=${dto.courseNum}|">수정</a>|  
 <a th:href="@{courseDel(courseNum=${dto.courseNum})}">삭제</a>  | 
-=======
+
 	<!-- Page Container -->
 	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
 
