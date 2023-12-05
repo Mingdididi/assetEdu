@@ -13,7 +13,10 @@ import eduConnect.service.test.TestAutoNumService;
 import eduConnect.service.test.TestDeleteService;
 import eduConnect.service.test.TestDetailService;
 import eduConnect.service.test.TestListService;
+import eduConnect.service.test.TestSubConfService;
+import eduConnect.service.test.TestSubmitService;
 import eduConnect.service.test.TestWriteService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("test")
@@ -28,9 +31,13 @@ public class TestController {
 	TestDetailService testDetailService;
 	@Autowired
 	TestDeleteService testDeleteService;
+	@Autowired
+	TestSubmitService testSubmitService;
+	@Autowired
+	TestSubConfService testSubConfService;
 	
 	@GetMapping("testList")
-	public String testList(@RequestParam(value="courseNum") String courseNum, Model model) {
+	public String testList(@RequestParam(value="courseNum") String courseNum, Model model, HttpSession session) {
 		
 		testListService.execute(courseNum, model);
 		
@@ -65,5 +72,21 @@ public class TestController {
 		testDeleteService.execute(testCommand.getTestNum());
 		testWriteService.execute(testCommand);
 		return "redirect:testList?courseNum="+testCommand.getCourseNum();
+	}
+	
+	@GetMapping("testStu")
+	public String testStu(@RequestParam("courseNum") String courseNum,
+			 @RequestParam("sessionNum") String sessionNum
+			 ,Model model, HttpSession session) {
+		testDetailService.execute(courseNum, sessionNum, model);
+		
+		testSubConfService.execute(sessionNum, courseNum, session, model);
+		return  "thymeleaf/test/testStu";
+	}
+	
+	@PostMapping("testSubmit")
+	public String testStuAnswer(TestCommand testCommand, HttpSession session) {
+		testSubmitService.execute(testCommand, session);
+		return"redirect:testList?courseNum="+testCommand.getCourseNum();
 	}
 }

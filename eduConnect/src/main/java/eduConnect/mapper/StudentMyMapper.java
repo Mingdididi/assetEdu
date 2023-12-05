@@ -3,6 +3,7 @@ package eduConnect.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import eduConnect.domain.StuCourseDTO;
 import eduConnect.domain.StuCoursePlusDTO;
@@ -14,4 +15,9 @@ public interface StudentMyMapper {
 	public void studentDelete(String studentNum);
 	public List<StuCoursePlusDTO> stuCourseList(String studentNum);
 	public void stuCourseRegist(StuCourseDTO dto);
+	public void courseStuAdd(StuCourseDTO dto);
+	public int [] testSelect(String studentNum);
+	public void attendInsert(@Param("studentNum") String studentNum, 
+							@Param("sessionNum") int sessionNum
+							,@Param("courseNum") String courseNum);
 }
