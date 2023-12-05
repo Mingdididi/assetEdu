@@ -16,10 +16,11 @@ import eduConnect.domain.AuthInfoDTO;
 import eduConnect.service.attend.AttendListService;
 import eduConnect.service.attend.AttendRatioService;
 import eduConnect.service.course.CourseStudentListService;
+import eduConnect.service.student.StudentScoreService;
 import eduConnect.service.teacher.TeacherDetailService;
 import eduConnect.service.teacher.TeacherUpdateservice;
 import jakarta.servlet.http.HttpSession;
-///////////////////// 선생님 입장에서 본인 정보 수정하는 Controller
+
 @Controller
 @RequestMapping("teacher")
 public class TeacherController {
@@ -33,6 +34,8 @@ public class TeacherController {
 	AttendListService attendListService;
 	@Autowired
 	AttendRatioService attendRatioService;
+	@Autowired
+	StudentScoreService studentScoreService;
 	
 	@RequestMapping(value= "MyPage", method=RequestMethod.GET)
 	   public String Mypage() {
@@ -83,4 +86,16 @@ public class TeacherController {
 		attendRatioService.execute(courseNum, studentNum, model);
 		return "thymeleaf/attend/attendList";
 	}
+	
+	@GetMapping("studentScore")
+	public String studentScore(
+			@RequestParam("courseNum") String courseNum,
+			@RequestParam("studentNum") String studentNum
+			,Model model) {
+		
+		studentScoreService.execute(courseNum, studentNum, model);
+		
+		return "thymeleaf/student/studentScore";
+	}
+	
 }

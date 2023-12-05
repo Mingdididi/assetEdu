@@ -79,22 +79,15 @@ tr:first-child {
 			<div class="w3-twothird">
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
-					<h2 class="w3-text-grey w3-padding-16">수강생 정보</h2>
+					<h2 class="w3-text-grey w3-padding-16"></h2>
 					<table>
 						<tr>
-							<td>이름</td>
-							<td>연락처
-							<td>이메일</td>
-							<td>출석률</td>
+							<td>회차</td>
 							<td>성적</td>
 						</tr>
-						<tr th:each="studentInfo:${studentInfos}">
-							<td>[[${studentInfo.studentName}]]</td>
-							<td>[[${studentInfo.studentPhone}]]</td>
-							<td>[[${studentInfo.studentEmail}]]</td>
-							<!-- teacherController에서 받음 -->
-							<td><a th:href="|attendList?courseNum=${courseNum}&studentNum=${studentInfo.studentNum}|">[[${studentInfo.attendRatio}]]</a></td>
-							<td><a th:href="|studentScore?courseNum=${courseNum}&studentNum=${studentInfo.studentNum}|">성적</a></td>
+						<tr th:each="score, status : ${scores}">
+							<td th:text="${status.index + 1}"></td>
+							<td th:text="${score}"></td>
 						</tr>
 					</table>
 

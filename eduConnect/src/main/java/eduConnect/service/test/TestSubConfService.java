@@ -53,6 +53,9 @@ public class TestSubConfService {
 		int score = (int)((double)rightAnswer/totalQuestion *100);
 		
 		System.out.println("실행");
+		System.out.println(courseNum);
+		System.out.println(studentNum);
+		System.out.println(sessionNum);
 		System.out.println(totalQuestion);
 		System.out.println(rightAnswer);
 		System.out.println(score);
