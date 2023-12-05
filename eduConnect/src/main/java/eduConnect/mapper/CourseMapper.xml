@@ -46,6 +46,6 @@
 	
 	</delete>
 	<select id="courseStudent" parameterType="string" resultType="courseStu">
-	select student_num from course_student where course_num=#{courseNum}
+	select course_num courseNum, student_num studentNum from course_student where course_num=#{courseNum}
 	</select>
 </mapper>

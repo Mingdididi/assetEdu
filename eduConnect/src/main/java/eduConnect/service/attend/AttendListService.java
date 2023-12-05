@@ -16,10 +16,7 @@ public class AttendListService {
 	@Autowired
 	AttendMapper attendMapper;
 	
-	public void execute(String courseNum, HttpSession session, Model model) {
-		
-		AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
-		String studentNum = auth.getUserNum();
+	public void execute(String courseNum, String studentNum, Model model) {
 		List<AttendDTO> list = attendMapper.attendList(courseNum,studentNum );
 		model.addAttribute("list", list);
 	}

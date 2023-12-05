@@ -21,4 +21,6 @@ public class StudentDTO {
 	String studentAddrDetail;
 	String studentPost;
 	String studentEmailConfig;
+	
+	int attendRatio;
 }

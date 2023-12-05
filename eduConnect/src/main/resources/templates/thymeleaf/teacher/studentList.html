@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+학생목록
+<table>
+<tr><td>이름</td><td>연락처<td>이메일</td><td>출석률</td><td>성적</td></tr>
+<tr th:each="studentInfo:${studentInfos}">
+<td>[[${studentInfo.studentName}]]</td><td>[[${studentInfo.studentPhone}]]</td><td>[[${studentInfo.studentEmail}]]</td>
+<td><a href="">[[${studentInfo.attendRatio}]]</a></td><td>성적</td></tr>
+<tr><td>
+</table>
+</body>
+</html>

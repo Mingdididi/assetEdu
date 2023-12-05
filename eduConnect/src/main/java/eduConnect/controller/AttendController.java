@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import eduConnect.domain.AuthInfoDTO;
 import eduConnect.service.attend.AttendListService;
 import eduConnect.service.attend.AttendRatioService;
 import jakarta.servlet.http.HttpSession;
@@ -21,8 +22,10 @@ public class AttendController {
 	
 	@GetMapping("attendList")
 	public String attendList(@RequestParam("courseNum") String courseNum, HttpSession session, Model model) {
-		attendListService.execute(courseNum, session, model);
-		attendRatioService.execute(courseNum, session, model);
+		AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
+		String studentNum = auth.getUserNum();
+		attendListService.execute(courseNum, studentNum, model);
+		attendRatioService.execute(courseNum, studentNum, model);
 		return "thymeleaf/attend/attendList";
 	}
 }
