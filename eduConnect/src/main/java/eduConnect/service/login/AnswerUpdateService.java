@@ -11,8 +11,8 @@ import eduConnect.mapper.QuestionMapper;
 public class AnswerUpdateService {
 	@Autowired 
 	QuestionMapper questionMapper;
-	public void execute(QuestionCommand questionCommand) {
-		QuestionDTO dto=new QuestionDTO();
+	public void execute(Integer questionNum, QuestionCommand questionCommand) {
+		QuestionDTO dto=questionMapper.questionOneSelect(questionNum);
 		dto.setAnswerContent(questionCommand.getAnswerContent());
 		dto.setTeacherNum(questionCommand.getTeacherNum());
 		questionMapper.answerUpdate(dto);

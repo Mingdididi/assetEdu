@@ -8,12 +8,15 @@ import lombok.Data;
 @Alias("question")
 @Data
 public class QuestionDTO {
-	String questionNum;
+	String courseNum;
+	Integer questionNum;
 	String studentNum;
+	String studentName;
 	String questionSubject;
 	Date questionDate;
 	String questionContent;
 	String teacherNum;
+	String teacherName;
 	String answerContent;
 	Date answerDate;
 	Date updateDate;

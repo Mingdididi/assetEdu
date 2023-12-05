@@ -73,7 +73,7 @@ td, th {
 					<h2 class="w3-text-grey w3-padding-16">질의응답 목록</h2>
 					
 					<!-- 질문 목록 리스트 -->
-					<form action="qaList" method="post">
+					<form action="questionList" method="post">
 						<input type="search" name="searchWord" size=50 
 							th:value="${searchWord}" /> <input type="submit" value="검색" />
 					</form><br/>
@@ -90,8 +90,8 @@ td, th {
 								<td><a>[[${questionVO.questionNum}]]</a></td>
 								<td><a
 									th:href="@{questionDetail(questionNum=${questionVO.questionNum})}">[[${questionVO.questionSubject}]]</a></td>
-								<td>[[${questionVO.questionWriter}]]</td>
-								<td>[[${#dates.format(questionVO.questionRegistDate,'yyyy-MM-dd')}]]</td>
+								<td>[[${questionVO.studentName}]]</td>
+								<td>[[${#dates.format(questionVO.questionDate,'yyyy-MM-dd')}]]</td>
 							</tr>
 							<!-- 페이지 누를 때마다 그에 맞는 리스트 불러오는 요청 -->
 							<tr>
@@ -109,7 +109,7 @@ td, th {
 							    </th:block> <th:block th:if="${page >= maxPage}"> [다음] </th:block></th>
 							</tr>
 						</table>
-				<a href="questionRegist">질문하기</a>
+				<a th:href="|questionRegist?courseNum=${courseNum}|">질문하기</a>
 				</div>
 
 			</div>

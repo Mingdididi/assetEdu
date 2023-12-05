@@ -4,30 +4,22 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="eduConnect.mapper.QuestionMapper">
-<sql id="questionBaseColumns">
-question_num, student_num, question_date, teacher_num, answer_content, answer_date, 
-update_date, question_subject, question_content
-</sql>
-<sql id="questionAliasColumns">
-question_num questionNum, student_num studentNum, question_date questionDate, 
-teacher_num teacherNum, answer_content answerContent, answer_date answerDate, 
-update_date updateDate, question_subject questionSubject, question_content questionContent
-</sql>
 <select id="autoNum"  resultType="string">
-select concat('qa' , coalesce(max(substr(question_num,3)::Integer),100000) + 1) from qa_table
+select coalesce (max(question_num)+1,1) as question_num from qa_table
 </select>
 
 <insert id="questionInsert" parameterType="question" >
-	insert into qa_table( <include refid="questionBaseColumns" /> )
-	values( #{questionNum},#{studentNum} ,now(), #{teacherNum},#{answerContent},#{answerDate}
-	 ,#{updateDate}  ,#{questionSubject}  ,#{questionContent})
+	insert into qa_table( question_num, student_num, question_subject, question_content, question_date, course_num )
+	values( #{questionNum},#{studentNum} ,#{questionSubject}, #{questionContent}, now(), #{courseNum}) 
 </insert>
 
 <select id="questionAllSelect" resultType="question" parameterType="startEndPageDTO" >
 select *
-from   (select ROW_NUMBER() OVER (ORDER BY question_num) AS rn, <include refid="questionAliasColumns" />
-		from (select <include refid="questionBaseColumns" />
-			from qa_table
+from   (select ROW_NUMBER() OVER (ORDER BY question_num) AS rn, question_num questionNum, student_num studentNum, question_date questionDate, 
+teacher_num teacherNum, answer_content answerContent, answer_date answerDate, update_date updateDate, question_subject questionSubject, question_content questionContent, student_name studentName, teacher_name teacherName, course_num courseNum  
+		from (select question_num, s.student_num, question_date, t.teacher_num, answer_content, answer_date, 
+update_date, question_subject, question_content, student_name, teacher_name, course_num 
+			from qa_table q join student s on q.student_num=s.student_num left outer join teacher t on q.teacher_num = t.teacher_num
 			<if test="searchWord != null">
 			where question_subject  like '%' || #{searchWord} || '%'  
 			   or question_content  like '%' || #{searchWord} || '%'  
@@ -46,8 +38,10 @@ where rn between #{startRow}  and #{endRow}
 	</if>
 </select>
 
-<select id="questionOneSelect"  parameterType="string" resultType="question">
- select <include refid="questionAliasColumns" />
+<select id="questionOneSelect"  parameterType="integer" resultType="question">
+ select question_num questionNum, student_num studentNum, question_date questionDate, 
+teacher_num teacherNum, answer_content answerContent, answer_date answerDate, update_date updateDate, 
+question_subject questionSubject, question_content questionContent, course_num courseNum  
 from qa_table where question_num = #{questionNum}
 </select>
 
@@ -66,7 +60,7 @@ set   answer_content = #{answerContent}
 where question_num = #{questionNum}
 </update>
 
-<delete id="questionDelete" parameterType="string">
+<delete id="questionDelete" parameterType="integer">
 delete from qa_table
 where question_num = #{questionNum}
 </delete>

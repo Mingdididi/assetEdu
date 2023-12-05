@@ -73,14 +73,17 @@ footer {
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
 					<h2 class="w3-text-grey w3-padding-16">Q) [[${questionCommand.questionSubject}]] </h2>
 					 <div class="w3-container">
-				         <h5 class="w3-opacity"><b>작성자 [[${studentName}]] | 등록일 [[${#dates.format(questionCommand.questionDate,'yyyy-MM-dd')}]]</b></h5>
+				         <h5 class="w3-opacity"><b>작성자 [[${questionCommand.studentName}]] | 등록일 [[${#dates.format(questionCommand.questionDate,'yyyy-MM-dd')}]]</b></h5>
 				          <p>[[${questionCommand.questionContent}]]</p>
 				          <hr>
 				        </div>
 				     <h3 class="w3-text-grey w3-padding-16"> 선생님 답변 </h3>   
 				       <form action="answerUpdate" method="post">
 						<table border=1 width=600px>
-							<tr><td><textarea rows="20" cols="80" name="answerContent"/></td></tr>
+						<tr><td><input type="hidden" name="questionNum" th:value="${questionCommand.questionNum}"/></td></tr>
+							<tr><td><input type="hidden" name="questionSubject" th:value="${questionCommand.questionSubject}"/></td></tr>
+							<tr><td><input type="hidden" name="teacherNum" th:value="${questionCommand.teacherNum}"/></td></tr>
+							<tr><td><textarea rows="20" cols="80" name="answerContent"></textarea></td></tr>
 							<tr><td><input type="submit" value="수정"/></td></tr>
 						</table>
 					</form><br/>

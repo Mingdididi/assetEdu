@@ -12,8 +12,8 @@ public interface QuestionMapper {
 	public void questionInsert(QuestionDTO dto);
 	public List<QuestionDTO> questionAllSelect(StartEndPageDTO vo);
 	public Integer questionCount(String searchWord);
-	public QuestionDTO questionOneSelect(String questionNum);
+	public QuestionDTO questionOneSelect(Integer questionNum);
 	public void answerRegist(QuestionDTO dto);
 	public void answerUpdate(QuestionDTO dto);
-	public void questionDelete(String questionNum);
+	public void questionDelete(Integer questionNum);
 }

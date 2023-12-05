@@ -11,6 +11,9 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+.right-align {
+        text-align: right;
+    }
 html, body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Roboto", sans-serif
 }
@@ -67,9 +70,7 @@ tr:first-child {
 				<div class="w3-white w3-text-grey w3-card-4">
 					<div class="w3-container">
 						<h2>에듀 커넥트</h2>
-
-
-						<div th:if="${session.auth == null}">
+						<div th:block th:if="${session.auth == null}"><!-- 로그인안한경우 -->
 							<form action="/login/login" method="post"
 								th:object="${loginCommand}">
 								<table border="1" align="center">
@@ -100,72 +101,41 @@ tr:first-child {
 								</table>
 							</form>
 						</div>
-						<div th:if="${session.auth != null}">
-<<<<<<< HEAD
-							<div th:block th:if="${session.auth.grade == 'stu'}">
-								학생
-								<a href="/student/myPage">마이페이지</a>
-								</div>
-=======
-							<th:block th:if="${session.auth.grade == 'stu'}">
-학생
-<a href="/student/myPage">마이페이지</a>
-<a href="/student/course">과목</a>
-</th:block>
->>>>>>> branch 'master' of https://github.com/YeeunGo/eduConnect.git
-							<th:block th:if="${session.auth.grade == 'tc'}">
-								선생
-								<a href="teacher/MyPage">마이페이지</a>
-															</th:block>
-							<th:block th:if="${session.auth.grade == 'ma'}">
-관리자<br>
-								<a href="teacherRg/teacherList">선생님 목록</a>
-								<br>
-							</th:block>
-							<li><a href="login/logout">로그아웃</a></li>
+						<div th:block th:if="${session.auth != null}" class="right-align"><!-- 로그인한경우 -->
+						
+							<span th:block th:if="${session.auth.grade == 'stu'}">
+								[[${session.auth.userName}]]님, 반갑습니다.<br/>
+								<a href="/student/myPage">마이페이지</a>|
+								<a href="/student/course">내 강의실</a>|
+							</span>
+							<span th:block th:if="${session.auth.grade == 'tc'}">
+								[[${session.auth.userName}]]선생님, 반갑습니다.<br/>
+								<a href="/teacher/MyPage">마이페이지</a>|
+								<a href="/course/courseList">내 강의실</a>|
+							</span>
+							<span th:block th:if="${session.auth.grade == 'ma'}">
+								[[${session.auth.userName}]]님, 반갑습니다.<br/>
+								<a href="teacherRg/teacherList">선생님 목록</a>|
+							</span>
+							<a href="login/logout">로그아웃</a>
+							
+						</div>
+						<!-- 로그인한경우 끝 -->
+						<hr>
+						<div>
+						    <img src="/static/images/mainimg.png" alt="MainImage"><br/>
 						</div>
 					</div>
 				</div>
 				<br>
-
+				</div>
 				<!-- End Left Column -->
-			</div>
-
-<<<<<<< HEAD
-			<!-- Right Column -->
-			<div class="w3-twothird">
-	
-				<div class="w3-container w3-card w3-white w3-margin-bottom">
-					<!--  나중에 삭제 -->
-					<h2 class="w3-text-grey w3-padding-16">선생님 목록</h2>
-
-					<!-- 선생님 목록 리스트 -->
-					오른쪽 상자
-					<!-- 선생님 목록리스트 종료 -->
-					<a href="teacherRg/teacherRegist">선생님 등록</a>
-				</div>
-				<!--  학생 로그인 시 -->
-				<div class="w3-container w3-card w3-white w3-margin-bottom">
-				<div th:if = "${session.auth!=null}">
-					<div th:if = "${session.auth.grade=='stu'}">
-						<h2 class="w3-text-grey w3-padding-16"><a href="student/course"/>수강 과목</h2>
-					</div>
-				</div>
-				
-
-			</div>
-
-			<!-- End Right Column -->
 		</div>
-=======
->>>>>>> branch 'master' of https://github.com/YeeunGo/eduConnect.git
-
 		<!-- End Grid -->
 	</div>
 
 	<!-- End Page Container -->
 
-	
 
 </body>
 

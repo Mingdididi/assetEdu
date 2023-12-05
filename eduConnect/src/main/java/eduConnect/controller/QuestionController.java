@@ -39,19 +39,21 @@ public class QuestionController {
 	AnswerUpdateService answerUpdateService;
 	@Autowired
 	QuestionDeleteService questionDeleteService;
-	@GetMapping("questionList")
+	@RequestMapping("questionList")
 	public String qaList(@RequestParam(value="page", required = false, defaultValue = "1" ) int page,
-			@RequestParam(value="searchWord" , required = false) String searchWord,
-			Model model) {
+			@RequestParam(value="searchWord" , required = false) String searchWord, 
+			@RequestParam(value="courseNum") String courseNum, Model model) {
 		questionListService.execute(searchWord, page, model);
-		return "thymeleaf/teacher/questionList";
+		model.addAttribute("courseNum", courseNum);
+		return "thymeleaf/question/questionList";
 	}
 	
 	@GetMapping("questionRegist")
-	public String form(HttpSession session, QuestionCommand questionCommand, Model model) {
-		questionAutoNumService.execute(questionCommand, model);
+	public String form(@RequestParam(value="courseNum")String courseNum, HttpSession session, QuestionCommand questionCommand, Model model) {
+		questionAutoNumService.execute(model);
 		AuthInfoDTO auth = (AuthInfoDTO) session.getAttribute("auth");
 		model.addAttribute("studentNum", auth.getUserNum());
+		model.addAttribute("courseNum",courseNum);
 		return "thymeleaf/question/questionForm";
 	}
 	
@@ -61,26 +63,29 @@ public class QuestionController {
 		return "thymeleaf/question/questionForm";
 		}
 		questionInsertService.execute(questionCommand);
-	return "redirect:questionList";
+		String courseNum = questionCommand.getCourseNum();
+	return "redirect:questionList?courseNum="+courseNum;
 	}
 	
 	@RequestMapping("questionDetail")
-	public String questionDetail(HttpSession session, @RequestParam(value = "questionNum") String questionNum, Model model) {
+	public String questionDetail(HttpSession session, @RequestParam(value = "questionNum") Integer questionNum, Model model) {
 		AuthInfoDTO auth = (AuthInfoDTO)session.getAttribute("auth");
 		model.addAttribute("grade", auth.getGrade());
 		questionDetailService.execute(questionNum, model);
-		return "thymeleaf/teacher/questionDetail";
+		return "thymeleaf/question/questionDetail";
 	}
 	
 	@RequestMapping("questionDelete")
 	public String questionDelete(
-			@RequestParam(value="questionNum") String questionNum) {
+			@RequestParam(value="questionNum") Integer questionNum,
+			@RequestParam(value="courseNum") String courseNum) {
 		questionDeleteService.execute(questionNum);
-		return "redirect:questionList";
+		return "redirect:questionList?courseNum="+courseNum;
 	}		
 	
 	@RequestMapping(value = "answerRegister", method = RequestMethod.GET)
-	public String answerForm(QuestionCommand questionCommand, Model model) {
+	public String answerForm(@RequestParam(value="questionNum")Integer questionNum, Model model, QuestionCommand questionCommand) {
+		questionDetailService.execute(questionNum, model);
 		return "thymeleaf/question/answerRegister";
 	}
 	@PostMapping("answerRegister")
@@ -88,22 +93,25 @@ public class QuestionController {
 		if (result.hasErrors()) {	
 			return "thymeleaf/question/answerRegister";
 		}
-		answerRegisterService.execute(questionCommand);
-		return "redirect:questionDetail";
+		Integer questionNum = questionCommand.getQuestionNum();
+		answerRegisterService.execute(questionNum, questionCommand);
+		return "redirect:questionDetail?questionNum="+questionCommand.getQuestionNum();
 		
 	}
 	
 	@RequestMapping(value = "answerUpdate", method = RequestMethod.GET)
-	public String answerUpdateForm(QuestionCommand questionCommand, Model model) {
-		return "thymeleaf/teacher/answerUpdate";
+	public String answerUpdateForm(@RequestParam(value="questionNum")Integer questionNum, QuestionCommand questionCommand, Model model) {
+		questionDetailService.execute(questionNum, model);
+		return "thymeleaf/question/answerUpdate";
 	}
 	@PostMapping("answerUpdate")
 	public String answerUpdate (@Validated QuestionCommand questionCommand, BindingResult result) {
 		if (result.hasErrors()) {	
-			return "thymeleaf/teacher/answerUpdate";
+			return "thymeleaf/question/answerUpdate";
 		}
-		answerUpdateService.execute(questionCommand);
-		return "redirect:questionDetail";
+		Integer questionNum = questionCommand.getQuestionNum();
+		answerUpdateService.execute(questionNum,questionCommand);
+		return "redirect:questionDetail?questionNum="+questionCommand.getQuestionNum();
 		
 	}
 }

@@ -18,10 +18,10 @@ public class QuestionListService {
 	public void execute(String searchWord,int page, Model model) {
 		int limit = 10;
 		int limitPage = 10;
-		int stratRow = (page - 1) *  limit + 1;
-		int endRow = stratRow + limit - 1;
+		int startRow = (page - 1) *  limit + 1;
+		int endRow = startRow + limit - 1;
 		StartEndPageDTO vo = new StartEndPageDTO();
-		vo.setStartRow(stratRow); 
+		vo.setStartRow(startRow); 
 		vo.setEndRow(endRow);
 		vo.setSearchWord(searchWord);
 		
@@ -38,7 +38,7 @@ public class QuestionListService {
 		if(maxPage < endPage) endPage = maxPage;
 
 		model.addAttribute("page", page);
-		model.addAttribute("stratRow", stratRow);
+		model.addAttribute("stratRow", startRow);
 		model.addAttribute("endRow", endRow);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);

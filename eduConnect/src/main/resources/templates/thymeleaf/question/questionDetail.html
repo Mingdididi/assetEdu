@@ -76,16 +76,15 @@ footer {
 				         <h5 class="w3-opacity"><b>작성자 [[${studentName}]] | 등록일 [[${#dates.format(questionCommand.questionDate,'yyyy-MM-dd')}]]</b></h5>
 				          <p>[[${questionCommand.questionContent}]]</p>
 				          <hr>
-				          <th:block th:if="${questionCommand.answerContent == null}">
+				          <th:block th:if="${questionCommand.answerContent == null && questionCommand.studentNum == session.auth.getUserNum()}"><!-- 답변이없으면 질문한 학생은 삭제가능 -->
 				         <h6 class="w3-text-teal">
-					        <i class="fa fa-calendar fa-fw w3-margin-right"></i>
 					        <span class="w3-tag w3-teal w3-round">
-					            <a href="questionDelete">삭제</a>
+					            <a th:href="@{questionDelete(questionNum=${questionCommand.questionNum},courseNum=${questionCommand.courseNum})}">삭제</a>
 					        </span>
 					    </h6>
 				          </th:block>
-				        </div>
-				      <th:block th:if="${questionCommand.answerContent != null}">
+				          
+				        <th:block th:if="${questionCommand.answerContent != null}">
 						    <h3 class="w3-text-grey w3-padding-16"> 선생님 답변 </h3>
 						    <div class="w3-container">
 						        <h5 class="w3-opacity">
@@ -94,27 +93,28 @@ footer {
 						        <p>[[${questionCommand.answerContent}]]</p>
 						        <hr>
 						    </div>
-						</th:block>
+						</th:block> 
+						 <th:block th:if="${grade =='tc' && questionCommand.answerContent==null}">
+						    <h6 class="w3-text-teal">
+						        <span class="w3-tag w3-teal w3-round">
+						            <a th:href="|answerRegister?questionNum=${questionCommand.questionNum}|">답변하기</a>
+						        </span>
+						    </h6>
+					</th:block>  
+					<th:block th:if="${grade =='tc' && questionCommand.answerContent!=null }">
+						    <h6 class="w3-text-teal">
+						        <span class="w3-tag w3-teal w3-round">
+						            <a th:href="|answerUpdate?questionNum=${questionCommand.questionNum}|">수정하기</a>
+						        </span>
+						    </h6>
+					</th:block>  
+						
+						
+				        </div>
 			</div>
-			<div th:if="${grade =='teacher'}">
-				<div th:if="${questionCommand.answerContent==null}">
-					    <h6 class="w3-text-teal">
-					        <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-					        <span class="w3-tag w3-teal w3-round">
-					            <a href="answerRegister">답변하기</a>
-					        </span>
-					    </h6>
-				</div>
-				<div th:if="${questionCommand.answerContent!='null'}">
-					    <h6 class="w3-text-teal">
-					        <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-					        <span class="w3-tag w3-teal w3-round">
-					            <a href="answerUpdate">수정하기</a>
-					        </span>
-					    </h6>
-				</div>
+						
 			</div>
-
+			
 			<!-- End Right Column -->
 		</div>
 

@@ -8,12 +8,14 @@ import lombok.Data;
 
 @Data
 public class QuestionCommand {
-	String questionNum;
+	String courseNum;
+	Integer questionNum;
 	String studentNum;
+	String studentName;
 	@NotEmpty(message = "제목을 입력해주세요.")
 	String questionSubject;
 	Date questionDate;
-	@Size(min = 5, max = 500)
+	@Size(min = 2, max = 500)
 	String questionContent;
 	String teacherNum;
 	String answerContent;

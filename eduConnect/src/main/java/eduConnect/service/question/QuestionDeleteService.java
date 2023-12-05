@@ -9,7 +9,7 @@ import eduConnect.mapper.QuestionMapper;
 public class QuestionDeleteService {
 	@Autowired
 	QuestionMapper questionMapper;
-	public void execute(String questionNum) {
+	public void execute(Integer questionNum) {		
 		questionMapper.questionDelete(questionNum);
 	}
 }

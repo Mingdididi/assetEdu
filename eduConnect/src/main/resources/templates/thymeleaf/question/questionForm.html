@@ -75,11 +75,13 @@ td, th {
 					<!-- 질의폼 -->
 					<form action="questionRegist" method="post">
 						<table border=1 width=600px>
-							<input type="hidden" name="studentNum" value="studentNum"/>
+							<tr><td><input type="hidden" name="studentNum" th:value="${studentNum}"/></td></tr>
+							<tr><td><input type="hidden" name="questionNum" th:value="${questionNum}"/></td></tr>
+							<tr><td><input type="hidden" name="courseNum" th:value="${courseNum}"/></td></tr>
 							<tr><th>제목</th></tr>
 							<tr><td><input type="text" name="questionSubject"/></td></tr>
 							<tr><th>내용</th></tr>
-							<tr><td><textarea rows="10" cols="50" name="questionContent"/></td></tr>
+							<tr><td><textarea rows="10" cols="50" name="questionContent"></textarea></td></tr>
 							<tr><td><input type="submit" value="질문하기"/></td></tr>
 						</table>
 					</form><br/>

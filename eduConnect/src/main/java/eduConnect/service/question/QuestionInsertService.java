@@ -20,7 +20,9 @@ public class QuestionInsertService {
 		dto.setQuestionNum(questionCommand.getQuestionNum());
 		dto.setStudentNum(questionCommand.getStudentNum());;
 		dto.setQuestionSubject(questionCommand.getQuestionSubject());
+		dto.setQuestionContent(questionCommand.getQuestionContent());
 		dto.setQuestionDate(questionCommand.getQuestionDate());
+		dto.setCourseNum(questionCommand.getCourseNum());
 		questionMapper.questionInsert(dto);
 	}
 }
