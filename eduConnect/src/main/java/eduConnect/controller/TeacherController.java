@@ -5,12 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import eduConnect.command.TeacherCommand;
 import eduConnect.domain.AuthInfoDTO;
+import eduConnect.service.course.CourseStudentListService;
 import eduConnect.service.teacher.TeacherDetailService;
 import eduConnect.service.teacher.TeacherUpdateservice;
 import jakarta.servlet.http.HttpSession;
@@ -22,7 +25,8 @@ public class TeacherController {
 	TeacherDetailService teacherDetailService;
 	@Autowired
 	TeacherUpdateservice teacherUpdateservice;
-
+	@Autowired
+	CourseStudentListService courseStudentListService;
 
 	@RequestMapping(value= "MyPage", method=RequestMethod.GET)
 	   public String Mypage() {
@@ -55,6 +59,12 @@ public class TeacherController {
 		teacherUpdateservice.execute(teacherCommand);
 		return "redirect:teacherDetail";
 		
+	}
+	
+	@GetMapping("studentList")
+	public String courseStudentList(@RequestParam("courseNum") String courseNum, Model model) {
+		courseStudentListService.execute(courseNum, model);
+		return "thymeleaf/teacher/studentList";
 	}
 	
 }

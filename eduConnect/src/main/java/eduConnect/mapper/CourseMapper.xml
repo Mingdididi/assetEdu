@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC 	
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	<mapper namespace="eduConnect.mapper.CourseMapper">
+<mapper namespace="eduConnect.mapper.CourseMapper">
 	
 	
 	<insert id="courseInsert" parameterType="course">
@@ -45,4 +45,7 @@
 	where course_num = #{courseNum}
 	
 	</delete>
-	</mapper>
+	<select id="courseStudent" parameterType="string" resultType="courseStu">
+	select student_num from course_student where course_num=#{courseNum}
+	</select>
+</mapper>
