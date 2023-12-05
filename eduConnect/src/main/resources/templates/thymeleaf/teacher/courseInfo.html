@@ -43,15 +43,6 @@ td, th {
 <body class="w3-light-grey">
 
 
-<!-- 선생님 입장 -->
-<div th:block th:if="${session.auth.grade=='tc'}">
-강의실 : <a th:href="${dto.classRoom}">[[${dto.classRoom}]]</a><br/>
-<a th:href="|../test/testList?courseNum=${dto.courseNum}|">시험</a>
-출석
-<a th:href="|../teacher/studentList?courseNum=${dto.courseNum}|">학생 목록</a>
-<a th:href="|courseUpdate?courseNum=${dto.courseNum}|">수정</a>|  
-<a th:href="@{courseDel(courseNum=${dto.courseNum})}">삭제</a>  | 
-
 	<!-- Page Container -->
 	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
 
@@ -88,20 +79,20 @@ td, th {
 <a th:href="|../teacher/studentList?courseNum=${dto.courseNum}|">학생 목록</a><hr/>
 <a th:href="|courseUpdate?courseNum=${dto.courseNum}|">수정</a> | 
 <a th:href="@{courseDel(courseNum=${dto.courseNum})}">삭제</a>  |
->>>>>>> branch 'master' of https://github.com/YeeunGo/eduConnect.git
 <a href="courseList">강의목록</a>
 </div>
 <!-- 학생 입장 -->
 <div th:block th:if="${session.auth.grade=='stu'}"><!-- 수강중이면 '수강중'으로 바꾸기 -->
+[[${dto.courseContent}]]<br/>
 	<th:block th:if="${courseRegisterd==0}">
 		<a th:href="|../student/courseRegist?courseNum=${dto.courseNum}|">수강신청</a> 
-	</th:block>
+	</th:block><hr/>
 	<th:block th:if="${courseRegisterd==1}">
 		
-강의실 : <a th:href="${dto.classRoom}">[[${dto.classRoom}]]</a><br/>
-		<a href="../question/questionList">질의응답</a> |
-		<a th:href="|../test/testList?courseNum=${dto.courseNum}|">시험</a> |
-		<a th:href="|../attend/attendList?courseNum=${dto.courseNum}|">출석</a>
+		<a th:href="${dto.classRoom}">강의실</a> <hr/> 
+		<a th:href="|../question/questionList?courseNum=${dto.courseNum}|">질의응답</a> <hr/>
+		<a th:href="|../test/testList?courseNum=${dto.courseNum}|">시험</a> <hr/>
+		<a th:href="|../attend/attendList?courseNum=${dto.courseNum}|">출석</a><hr/>
 	</th:block>
 </div>
 				</div>

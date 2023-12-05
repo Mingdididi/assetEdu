@@ -42,7 +42,9 @@ public class QuestionController {
 	@RequestMapping("questionList")
 	public String qaList(@RequestParam(value="page", required = false, defaultValue = "1" ) int page,
 			@RequestParam(value="searchWord" , required = false) String searchWord, 
-			@RequestParam(value="courseNum") String courseNum, Model model) {
+			@RequestParam(value="courseNum") String courseNum, Model model, HttpSession session) {
+		AuthInfoDTO auth = (AuthInfoDTO)session.getAttribute("auth");
+		model.addAttribute("grade", auth.getGrade());
 		questionListService.execute(searchWord, page, model);
 		model.addAttribute("courseNum", courseNum);
 		return "thymeleaf/question/questionList";

@@ -53,7 +53,7 @@ td, th {
 
 				<div class="w3-white w3-text-grey w3-card-4">
 					<div class="w3-container">
-						<h2>에듀 커넥트</a></h2>
+						<h2>에듀 커넥트</h2>
 						<p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="../teacher/teacherDetail">내 정보</a></p>
 						<p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="/">홈</a></p>
 						<p><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i><a href="../login/logout">로그아웃</a></p>
@@ -69,6 +69,7 @@ td, th {
 			<div class="w3-twothird">
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
+				<div th:block th:if="${session.auth.grade=='tc'}"><!-- 선생님일때 -->
 					<h2 class="w3-text-grey w3-padding-16">강의 과목</h2>
 						<table border= 1 width="600px" align="center">
                         	<tr><th>강의번호</th><th>강사번호</th><th>제목</th></tr>
@@ -76,7 +77,17 @@ td, th {
                             <td> [[${dto.teacherNum}]]</td><td>[[${dto.courseName}]]</td>
                             </tr>
                         </table><br /> 
-					<div th:block th:if="${session.auth.grade=='tc'}"><a href="courseWrite">등록하기</a></div>
+					<a href="courseWrite">등록하기</a>
+				</div><!-- 선생님일때 -->	
+				<div th:block th:if="${session.auth.grade=='stu'}"><!-- 학생일때 -->
+					<h2 class="w3-text-grey w3-padding-16">전체 과목</h2>
+						<table border= 1 width="600px" align="center">
+                        	<tr><th>강의번호</th><th>강사번호</th><th>제목</th></tr>
+                            <tr th:each="dto : ${dtos}"><td><a th:href="|courseDetail?courseNum=${dto.courseNum}|">[[${dto.courseNum}]]</a></td>
+                            <td> [[${dto.teacherNum}]]</td><td>[[${dto.courseName}]]</td>
+                            </tr>
+                        </table><br /> 
+				</div><!-- 학생일때 -->	
 				</div>
 
 			</div>
