@@ -43,7 +43,7 @@ textarea {
 	width: 100%;
 }
 
-button {
+button, input[type="submit"] {
 	cursor: pointer;
 	background-color: #2E8B57; /* 짙은 녹색 */
 	color: white;
@@ -85,7 +85,16 @@ button:hover {
       padding: 20px;
       text-align: center;
     }
+tr td:first-child input {
+    border: none; /* 테두리 없애기 */
+    background-color: transparent; /* 배경색 없애기 */
+}
 
+input[type="submit"]:hover {
+	background-color: white;
+	color: black;
+	border: 1px solid #2E8B57; /* 짙은 녹색 */
+}
 
 
 </style>
@@ -124,11 +133,12 @@ button:hover {
 			<div class="w3-twothird">
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
-					<h2 class="w3-text-grey w3-padding-16">시험 등록</h2>
-						<button onclick="addRow()">행 추가</button>
-					<form action="testUpdate" method="post">
-					회차 번호 : <input type="number" name="sessionNum" th:value="${dtos.get(0).sessionNum}" min="1" value="1">
+					<h2 class="w3-text-grey w3-padding-16">[[${dtos.get(0).sessionNum}]] 회차 시험</h2>
+						
+						
+					<form action="testUpdate" method="post"> 
 					등록일 : [[${#dates.format(dtos.get(0).testDate,'yyyy-MM-dd') }]]
+					<input type="hidden" name="sessionNum" th:value="${dtos.get(0).sessionNum}" readonly="readonly">
 					<input type="hidden" th:value="${dtos.get(0).testNum}" name="testNum">
 								<input type="hidden" th:value="${dtos.get(0).courseNum}" name="courseNum">
 					<table id="myTable">
@@ -151,7 +161,7 @@ button:hover {
 						</tbody>
 							
 					</table>
-					
+					<button onclick="addRow()">행 추가</button>
 					<input type="submit" value="시험 수정">
 				</form> 
 			

@@ -78,4 +78,8 @@ where t.test_num = (select test_num from test where course_num = #{courseNum} an
  <select id="testSessionCount" parameterType="string" resultType="Integer">
   select COUNT(*) from test where course_num = #{courseNum};
  </select>
+ 
+ <select id="testAutoSession" parameterType="string" resultType="string">
+select coalesce (max(session_num::integer),0)+1  from test where course_num = #{courseNum};
+</select>
 </mapper>

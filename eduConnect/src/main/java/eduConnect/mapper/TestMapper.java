@@ -39,4 +39,6 @@ public interface TestMapper {
 			);
 	
 	public Integer testSessionCount(String courseNum);
+	
+	public String testAutoSession(String courseNum);
 }

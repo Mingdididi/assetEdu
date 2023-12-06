@@ -10,8 +10,11 @@ import eduConnect.mapper.TestMapper;
 public class TestAutoNumService {
 	@Autowired
 	TestMapper testMapper;
-	public void execute(Model model) {
+	public void execute(Model model, String courseNum) {
 		String testNum = testMapper.testAutoNum();
+		String sessionNum = testMapper.testAutoSession(courseNum);
 		model.addAttribute("testNum", testNum);
+		model.addAttribute("AutoSessioNum",sessionNum );
+		System.out.println("sessionNum"+sessionNum);
 	}
 }

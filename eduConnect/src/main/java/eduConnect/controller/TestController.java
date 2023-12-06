@@ -46,7 +46,7 @@ public class TestController {
 	
 	@GetMapping("testRegist")
 	public String testRegist(@RequestParam(value="courseNum") String courseNum,Model model) {
-		testAutoNumService .execute(model);
+		testAutoNumService .execute(model, courseNum);
 		model.addAttribute("courseNum", courseNum);
 		return "thymeleaf/test/testForm";
 	}

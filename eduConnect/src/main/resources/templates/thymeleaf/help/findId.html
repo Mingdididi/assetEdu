@@ -10,7 +10,6 @@
 	href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
 <style>
 html, body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Roboto", sans-serif
@@ -29,9 +28,8 @@ td, th {
 	padding: 8px;
 }
 
-tr:first-child {
-	background-color: #f2f2f2; /* 연한 회색 배경색 */
-	margin-bottom: 10px; /* 첫 번째 행 아래 간격 조절 */
+th:first-child, td:first-child {
+  background-color: #f2f2f2;
 }
 
 footer {
@@ -40,20 +38,10 @@ footer {
 	width: 100%;
 }
 
-    .w3-container a {
-        text-decoration: none; /* 밑줄 제거 */
-        color: inherit; /* 부모 요소의 텍스트 색상 상속 */
-    }
-
-a:hover {
-    background-color: #e6e6e6; /* 배경색을 바꾸세요 */
-    color: #3366cc; /* 글씨색을 바꾸세요 */
-    
-}
 </style>
 </head>
 
-<body class="w3-light-grey" style="font-family: 'Noto Sans KR', sans-serif;">
+<body class="w3-light-grey">
 
 	<!-- Page Container -->
 	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
@@ -67,10 +55,8 @@ a:hover {
 				<div class="w3-white w3-text-grey w3-card-4">
 					<div class="w3-container">
 						<h2>에듀 커넥트</a></h2>
-						<p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="myPage">내 정보</a></p>
 						<p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="/">홈</a></p>
-						<p><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i><a href="../login/logout">로그아웃</a></p>
-						<br>
+												
 					</div>
 				</div>
 				<br>
@@ -82,21 +68,22 @@ a:hover {
 			<div class="w3-twothird">
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
-					<h2 class="w3-text-grey w3-padding-16"> 수강중인 강좌 </h2>
+					<h2 class="w3-text-grey w3-padding-16"> 아이디 찾기 </h2>
 				
-				<!-- 선생님 디테일 -->
-				<table>
-					<tr><th>수강과목</th><th>선생님</th></tr>	
-					<tr th:each="course : ${courses}">
-					<td><a th:href="@{../course/courseDetail(courseNum=${course.courseDTO.courseNum})}">[[${course.courseDTO.courseName}]]</a></td>
-					<td>[[${course.teacherName}]]</td></tr>
-				</table>
-	<a href="../course/courseList">강의 둘러보기</a>
-	<hr/>
-				</div>
 
-			</div>
-
+<form action="findId" name="frm" id="frm" method="post" th:object="${findIdCommand}">
+	<table border="1" width=600 align="center">
+		<tr><th>전화번호</th>
+		    <td><input type="text" name="userPhone" th:value="${findIdCommand.userPhone}" /><br/>
+		<span th:if="${#fields.hasErrors('userPhone')}" th:errors="*{userPhone}"></span>
+		    </td></tr>
+		<tr><th>이메일</th>
+		    <td><input type="email" name="userEmail" th:value="${findIdCommand.userEmail}" /><br/>
+		<span th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></span>
+			</td></tr>
+		<tr><th colspan="2"><input type="submit" value="아이디 찾기"/></th></tr>
+	</table>
+</form>
 			<!-- End Right Column -->
 		</div>
 

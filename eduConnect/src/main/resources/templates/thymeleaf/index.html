@@ -8,12 +8,86 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel='stylesheet'
 	href='https://fonts.googleapis.com/css?family=Roboto'>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
 <style>
-.right-align {
-        text-align: right;
+     /* user-greeting에 대한 공통 스타일링 */
+    .user-greeting {
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+        transition: box-shadow 0.3s ease; /* 그림자에 부드러운 전환 효과 추가 */
     }
+
+    /* 학생에 대한 스타일링 */
+    .user-greeting.student {
+        border: 2px solid #ddd;
+    }
+
+    /* 선생님에 대한 스타일링 */
+    .user-greeting.teacher {
+        border: 2px solid #ddd;
+    }
+
+    /* 관리자에 대한 스타일링 */
+    .user-greeting.manager {
+        border: 2px solid #ddd;
+    }
+
+    /* greeting-text에 대한 스타일링 */
+    .greeting-text {
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: underline;
+        text-decoration-color: #ddd;
+    }
+
+    /* user-links에 대한 스타일링 */
+    .user-links {
+        margin-top: 10px;
+    }
+
+    .user-links a {
+        color: #333;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+    /* 마우스 호버 시 그림자 효과 강화 */
+    .user-greeting:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+a:hover {
+    background-color: #e6e6e6; /* 배경색을 바꾸세요 */
+    color: #3366cc; /* 글씨색을 바꾸세요 */
+    
+}
+
+a{
+	 text-decoration: none;
+}
+
+tr a {
+    font-size: 90%;
+    /* 다른 스타일 속성들도 추가 가능 */
+}
+
+input {
+    border: none; /* 기존 테두리 제거 */
+    border-bottom: 1px solid gray; /* 밑줄 추가 */
+    outline: none; /* 포커스 효과 제거 */
+}
+
+input:focus {
+    border-bottom: 2px solid #007bff; /* 포커스 시 두꺼운 밑줄 및 원하는 색상 지정 */
+}
+
+.right-align {
+	text-align: right;
+}
+
 html, body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Roboto", sans-serif
 }
@@ -26,7 +100,6 @@ footer {
 
 table {
 	border-collapse: collapse;
-	
 }
 
 td, th {
@@ -49,14 +122,14 @@ tr:first-child {
 /* "에듀커넥트" 텍스트를 가운데 정렬하고 색상과 굵기 조절 */
 .w3-third h2 {
 	text-align: center;
-	color: #006400; /* 진녹색 */
+	color: #191970; /* 진녹색 */
 	font-weight: bold; /* 굵게 */
 	margin-top: 20px; /* 텍스트와 상단 간격 조절 */
 }
 </style>
 </head>
 
-<body class="w3-light-grey">
+<body class="w3-light-grey"  style="font-family: 'Noto Sans KR', sans-serif;">
 
 	<!-- Page Container -->
 	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
@@ -67,25 +140,26 @@ tr:first-child {
 			<!-- Left Column -->
 			<div class="w3-third">
 
-				<div class="w3-white w3-text-grey w3-card-4">
+				<div class="w3-white w3-text-grey w3-card-4" >
 					<div class="w3-container">
-						<h2>에듀 커넥트</h2>
-						<div th:block th:if="${session.auth == null}"><!-- 로그인안한경우 -->
+						<h2 style="font-family: 'Noto Sans KR', sans-serif;">에듀 커넥트</h2>
+						<div th:block th:if="${session.auth == null}">
+							<!-- 로그인안한경우 -->
 							<form action="/login/login" method="post"
 								th:object="${loginCommand}">
 								<table border="1" align="center">
 									<tr align="center">
-										<td colspan="2">자동로그인<input type="checkbox"
-											name="autoLogin" /> 아이디저장<input type="checkbox"
-											name="idStore">
+										<td colspan="2">자동로그인&nbsp;<input type="checkbox"
+											name="autoLogin" /> 아이디저장&nbsp;<input type="checkbox"
+											name="idStore" th:checked="${loginCommand.idStore != null && loginCommand.idStore}">
 										</td>
 									</tr>
 									<tr>
-										<td><input type="text" name="userId" placeholder="아이디"><br />
+										<td><input type="text" name="userId" placeholder="아이디" th:value="${loginCommand.userId}" ><br />
 											<span th:if="${#fields.hasErrors('userId')}"
 											th:errors="*{userId}"></span></td>
 										<td rowspan="2"><input type="image"
-											src="/static/images/loginicon.jpg" width="60"></td>
+											src="/static/images/loginicon.jpg" width="60" th:value="${loginCommand.userPw}"></td>
 									</tr>
 									<tr>
 										<td><input type="password" name="userPw"
@@ -94,51 +168,64 @@ tr:first-child {
 										</span></td>
 									</tr>
 									<tr>
-										<td colspan="2"><a href="/register/userAgree">회원가입</a> |
-											<a href="/help/findId">아이디 찾기</a> | <a
-											href="/help/findPassword">비밀번호 찾기</a></td>
+										<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/register/userAgree">회원가입</a>&nbsp; |&nbsp;
+											<a href="/help/findId">아이디 찾기</a>&nbsp; | &nbsp;<a
+											href="/">비밀번호 찾기</a></td>
 									</tr>
 								</table>
 							</form>
 						</div>
-						<div th:block th:if="${session.auth != null}" class="right-align"><!-- 로그인한경우 -->
-						
+						<div th:block th:if="${session.auth != null}" class="right-align">
+							<!-- 로그인한경우 -->
+
 							<span th:block th:if="${session.auth.grade == 'stu'}">
-								[[${session.auth.userName}]]님, 반갑습니다.<br/>
-								<a href="/student/myPage">마이페이지</a>|
-								<a href="/student/course">내 강의실</a>|
+								<div class="user-greeting student">
+									<p class="greeting-text">[[${session.auth.userName}]]님,
+										반갑습니다.</p>
+									<div class="user-links">
+										<a href="/student/myPage">마이페이지</a> | &nbsp;<a href="/student/course">내
+											강의실</a> | &nbsp;<a href="login/logout">로그아웃</a>
+									</div>
+								</div>
+							</span> <span th:block th:if="${session.auth.grade == 'tc'}">
+								<div class="user-greeting teacher">
+									<p class="greeting-text">[[${session.auth.userName}]] 선생님,
+										반갑습니다.</p>
+									<div class="user-links">
+										<a href="/teacher/MyPage">마이페이지</a> | &nbsp;<a
+											href="/course/courseList">내 강의실</a>| &nbsp;
+											 <a href="login/logout">로그아웃</a>
+									</div>
+								</div>
+							</span> <span th:block th:if="${session.auth.grade == 'ma'}">
+								<div class="user-greeting manager">
+									<p class="greeting-text">[[${session.auth.userName}]]님,
+										반갑습니다.</p>
+									<div class="user-links">
+										<a href="teacherRg/teacherList">선생님 목록</a> |
+										 <a href="login/logout">&nbsp;로그아웃</a>
+									</div>
+								</div>
 							</span>
-							<span th:block th:if="${session.auth.grade == 'tc'}">
-								[[${session.auth.userName}]]선생님, 반갑습니다.<br/>
-								<a href="/teacher/MyPage">마이페이지</a>|
-								<a href="/course/courseList">내 강의실</a>|
-							</span>
-							<span th:block th:if="${session.auth.grade == 'ma'}">
-								[[${session.auth.userName}]]님, 반갑습니다.<br/>
-								<a href="teacherRg/teacherList">선생님 목록</a>|
-							</span>
-							<a href="login/logout">로그아웃</a>
-							
+
 						</div>
 						<!-- 로그인한경우 끝 -->
 						<hr>
 						<div style="text-align: center;">
-						    <img src="/static/images/mainimg.png" alt="MainImage"><br/>
-						
+							<img src="/static/images/mainimg.png" alt="MainImage"><br />
+
 						</div>
-				</div>
-				<br>
+					</div>
+					<br>
 				</div>
 				<!-- End Left Column -->
 			</div>
 			<!-- Right Column -->
-		
-		<!-- End Grid -->
-	</div>
 
-	<!-- End Page Container -->
+			<!-- End Grid -->
+		</div>
 
-
+		<!-- End Page Container -->
 </body>
 
 </html>

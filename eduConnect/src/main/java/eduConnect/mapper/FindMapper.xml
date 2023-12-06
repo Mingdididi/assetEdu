@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="eduConnect.mapper.FindMapper">
+<update id="pwUpdate" parameterType="authInfo"> 
+update ${tableName}
+set ${pwColumName}  = #{userPw}
+where ${userIdColumName}  = #{userId}
+</update>
+
+
+<select id="userEmail" resultType="authInfo">
+select student_email userEmail , 'stu' grade
+from student
+where student_id = #{_userId} and student_phone = #{_userPhone} 
+union
+select teacher_email  , 'tc'
+from teacher
+where teacher_phone = #{_userPhone} and teacher_id = #{_userId} 
+</select>
+
+<select id="findId" parameterType="string" resultType="string">
+select student_id
+from student
+where student_email = #{arg1} 
+and (student_phone = #{arg0})
+union
+select teacher_id
+from teacher
+where teacher_phone = #{arg0} and teacher_email =#{arg1}
+</select>
+</mapper>	

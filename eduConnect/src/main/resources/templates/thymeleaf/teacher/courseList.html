@@ -10,6 +10,7 @@
 	href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
 <style>
 html, body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Roboto", sans-serif
@@ -36,11 +37,39 @@ td, th {
         background-color: #f2f2f2; /* 연한 회색 배경색 */
         margin-bottom: 10px; /* 첫 번째 행 아래 간격 조절 */
     }
+a:hover {
+    background-color: #e6e6e6; /* 배경색을 바꾸세요 */
+    color: #3366cc; /* 글씨색을 바꾸세요 */
+    
+}
 
+a{
+	 text-decoration: none;
+}
+
+a.button-style {
+    cursor: pointer;
+    background-color: #2E8B57;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    border-radius: 4px;
+}
+
+a.button-style:hover {
+    background-color: #228B22; /* 호버 상태일 때 배경색 변경 */
+    color: white;
+}
 </style>
 </head>
 
-<body class="w3-light-grey">
+<body class="w3-light-grey"  style="font-family: 'Noto Sans KR', sans-serif;">
 
 	<!-- Page Container -->
 	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
@@ -53,7 +82,7 @@ td, th {
 
 				<div class="w3-white w3-text-grey w3-card-4">
 					<div class="w3-container">
-						<h2>에듀 커넥트</h2>
+						<h2 style="font-family: 'Noto Sans KR', sans-serif;">에듀 커넥트</h2>
 						<p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="../teacher/teacherDetail">내 정보</a></p>
 						<p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="/">홈</a></p>
 						<p><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i><a href="../login/logout">로그아웃</a></p>
@@ -70,14 +99,14 @@ td, th {
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
 				<div th:block th:if="${session.auth.grade=='tc'}"><!-- 선생님일때 -->
-					<h2 class="w3-text-grey w3-padding-16">강의 과목</h2>
+					<h2 class="w3-text-grey w3-padding-16" style="font-family: 'Noto Sans KR', sans-serif;">강의 과목</h2>
 						<table border= 1 width="600px" align="center">
                         	<tr><th>강의번호</th><th>강사번호</th><th>제목</th></tr>
                             <tr th:each="dto : ${dtos}"><td><a th:href="|courseDetail?courseNum=${dto.courseNum}|">[[${dto.courseNum}]]</a></td>
                             <td> [[${dto.teacherNum}]]</td><td>[[${dto.courseName}]]</td>
                             </tr>
                         </table><br /> 
-					<a href="courseWrite">등록하기</a>
+					<a href="courseWrite" class="button-style">등록하기</a>
 				</div><!-- 선생님일때 -->	
 				<div th:block th:if="${session.auth.grade=='stu'}"><!-- 학생일때 -->
 					<h2 class="w3-text-grey w3-padding-16">전체 과목</h2>

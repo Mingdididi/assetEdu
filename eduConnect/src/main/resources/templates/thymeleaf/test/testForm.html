@@ -10,6 +10,7 @@
 	href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
 <style>
 body {
 	font-family: 'Arial', sans-serif;
@@ -43,7 +44,7 @@ textarea {
 	width: 100%;
 }
 
-button {
+button, input[type="submit"] {
 	cursor: pointer;
 	background-color: #2E8B57; /* 짙은 녹색 */
 	color: white;
@@ -53,12 +54,19 @@ button {
 	text-decoration: none;
 	display: inline-block;
 	font-size: 14px;
-	margin: 4px 2px;
+	margin: 4px 4px;
 	transition-duration: 0.4s;
 	border-radius: 4px;
 }
 
+
 button:hover {
+	background-color: white;
+	color: black;
+	border: 1px solid #2E8B57; /* 짙은 녹색 */
+}
+
+input[type="submit"]:hover {
 	background-color: white;
 	color: black;
 	border: 1px solid #2E8B57; /* 짙은 녹색 */
@@ -86,12 +94,15 @@ button:hover {
       text-align: center;
     }
 
-
+tr td:first-child input {
+    border: none; /* 테두리 없애기 */
+    background-color: transparent; /* 배경색 없애기 */
+}
 
 </style>
 </head>
 
-<body class="w3-light-grey">
+<body class="w3-light-grey"   style="font-family: 'Noto Sans KR', sans-serif;">
 
 	<!-- Page Container -->
 	<div class="w3-content w3-margin-top" style="max-width: 1400px;">
@@ -120,12 +131,11 @@ button:hover {
 			<div class="w3-twothird">
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
-					<h2 class="w3-text-grey w3-padding-16">시험 등록</h2>
-						<button onclick="addRow()">행 추가</button>
+					<h2 class="w3-text-grey w3-padding-16">[[${AutoSessioNum}]] 회차 시험</h2>
 					<form action="testUpdate" method="post">
 					<input type="hidden" name="testNum" th:value="${testNum}">
 					<input type="hidden" name="courseNum" th:value="${courseNum}">
-					회차 번호 : <input type="number" name="sessionNum" min="1" value="1">
+					<input type="hidden" name="sessionNum" min="1" th:value="${AutoSessioNum}">
 
 					<table id="myTable">
 						<thead>
@@ -133,7 +143,7 @@ button:hover {
 								<th>번호</th>
 								<th>문제</th>
 								<th>답</th>
-								<th>삭제</th>
+								<th> 삭제</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -146,8 +156,8 @@ button:hover {
 						</tbody>
 							
 					</table>
-					
-					<input type="submit" value="시험 등록">
+					<button onclick="addRow()">행 추가</button>
+					<input type="submit" value="시험 등록 ">
 				</form> 
 			
 
